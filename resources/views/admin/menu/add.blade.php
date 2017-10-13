@@ -104,7 +104,7 @@
 			    	<div class="row">
 						<div class="col-md-6">
 					    	<button type="submit" class="btn btn-primary">Lưu</button>
-					    	<button type="button" onclick="javascript:window.location='admin/menu?type={{ @$_GET[type] }}'" class="btn btn-danger">Thoát</button>
+					    	<button type="button" onclick="javascript:window.location='backend/menu?type={{ @$_GET[type] }}'" class="btn btn-danger">Thoát</button>
 				    	</div>
 			    	</div>
 			  	</div>

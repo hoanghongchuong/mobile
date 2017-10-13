@@ -18,7 +18,7 @@
       listid=listid.substr(1);   //alert(listid);
       if (listid=="") { alert("Bạn chưa chọn mục nào"); return false;}
       hoi= confirm("Bạn có chắc chắn muốn xóa?");
-      if (hoi==true) document.location = homeUrl()+"/admin/productcate/"+listid+"/delete_list";
+      if (hoi==true) document.location = homeUrl()+"/backend/productcate/"+listid+"/delete_list";
     });
   });
 </script>
@@ -28,7 +28,7 @@
     <small>@yield('action')</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="backend"><i class="fa fa-dashboard"></i> Home</a></li>
     <li><a href="javascript:">@yield('controller')</a></li>
     <li class="active">@yield('action')</li>
   </ol>
@@ -77,9 +77,9 @@
                 <td>{{$item->name}}</td>
                 <td class="text-center with_dieuhuong">
                   @if($item->status>0)
-                    <a href="admin/productcate/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Bật</a>
+                    <a href="backend/productcate/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Bật</a>
                   @else
-                    <a href="admin/productcate/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Tắt</a>
+                    <a href="backend/productcate/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Tắt</a>
                   @endif
                 </td>
                 <td class="text-center with_dieuhuong">
@@ -95,7 +95,7 @@
         </div><!-- /.box-body -->
         <div class="box-footer col-md-12">
           <div class="col-md-6">
-            <input type="button" onclick="javascript:window.location='admin/productcate/add'" value="Thêm" class="btn btn-primary" />
+            <input type="button" onclick="javascript:window.location='backend/productcate/add'" value="Thêm" class="btn btn-primary" />
             <button type="button" id="xoahet" class="btn btn-success">Xóa</button>
             <input type="button" value="Thoát" onclick="javascript:window.location='admin'" class="btn btn-danger" />
 

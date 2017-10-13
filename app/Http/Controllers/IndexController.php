@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Products;
+use App\ProductCate;
 use App\NewsLetter;
 use App\Recruitment;
 use DB,Cache,Mail;
@@ -58,7 +59,7 @@ class IndexController extends Controller {
 	{
 		$banner_danhmuc = DB::table('lienket')->select()->where('status',1)->where('com','chuyen-muc')->where('link','index')->get()->first();
 		$banner_sidebar = DB::table('banner_content')->where('position',5)->get();
-		$tintuc_moinhat = DB::table('news')->select()->where('status',1)->where('com','tin-tuc')->orderBy('created_at','desc')->take(12)->get();
+		$tintuc_moinhat = DB::table('news')->select()->where('status',1)->where('com','tin-tuc')->orderBy('created_at','desc')->take(4)->get();
 		$com='index';
 		$hot_news = DB::table('news')->where('status',1)->where('noibat',1)->orderBy('created_at','desc')->first();
 		// dd($hot_news);
@@ -100,12 +101,14 @@ class IndexController extends Controller {
 	{
 		//Tìm article thông qua mã id tương ứng
 		$cate_pro = DB::table('product_categories')->where('status',1)->orderby('id','asc')->get();
-		$thuonghieus = DB::table('thuonghieu')->get();
+
 		$product_cate = DB::table('product_categories')->select()->where('status',1)->where('alias',$id)->get()->first();
 		if(!empty($product_cate)){
-			$product = DB::table('products')->select()->where('status',1)->where('cate_id',$product_cate->id)->orderBy('stt','asc')->paginate(12);
+			$product = DB::table('products')->select()->where('status',1)->where('cate_id',$product_cate->id)->orderBy('stt','asc')->paginate(20);
 			$banner_danhmuc = DB::table('lienket')->select()->where('status',1)->where('com','chuyen-muc')->where('link','san-pham')->get()->first();
 			$doitac = DB::table('lienket')->select()->where('status',1)->where('com','doi-tac')->orderby('stt','asc')->get();
+			$tintucs = DB::table('news')->orderBy('id','desc')->take(3)->get();
+			$cateChilds = DB::table('product_categories')->where('parent_id',$product_cate->id)->get();
 			$setting = Cache::get('setting');
 			if(!empty($product_cate->title)){
 				$title = $product_cate->title;
@@ -116,13 +119,20 @@ class IndexController extends Controller {
 			$keyword = $product_cate->keyword;
 			$description = $product_cate->description;
 			$img_share = asset('upload/product/'.$product_cate->photo);
-
-			// End cấu hình SEO
-			return view('templates.productlist_tpl', compact('product','product_cate','banner_danhmuc','doitac','keyword','description','title','img_share','cate_pro','thuonghieus'));
+			return view('templates.productlist_tpl', compact('product','product_cate','banner_danhmuc','doitac','keyword','description','title','img_share','cate_pro','tintucs','cateChilds'));
 		}else{
 			return redirect()->route('getErrorNotFount');
 		}
 	}
+
+	public function getProductChild($alias){
+		$products = DB::table('products')->where('alias',$alias)->get();
+		dd($alias);
+		$tintucs = DB::table('news')->orderBy('id','desc')->take(3)->get();
+		return view('templates.productlist_level2', compact('tintucs'));
+	}
+
+	
 	public function getProductDetail($id)
 	{
         //Tìm article thông qua mã id tương ứng
@@ -134,6 +144,7 @@ class IndexController extends Controller {
 			$cateProduct = DB::table('product_categories')->select('name','alias')->where('id',$product_detail->cate_id)->first();
 			$productSameCate = DB::table('products')->select()->where('status',1)->where('alias','<>',$id)->where('cate_id',$product_detail->cate_id)->orderby('stt','desc')->get();
 			$setting = Cache::get('setting');
+			$tintucs = DB::table('news')->orderBy('id','desc')->take(3)->get();
 			// Cấu hình SEO
 			if(!empty($product_detail->title)){
 				$title = $product_detail->title;
@@ -145,7 +156,7 @@ class IndexController extends Controller {
 			$img_share = asset('upload/product/'.$product_detail->photo);
 
 			// End cấu hình SEO
-			return view('templates.product_detail_tpl', compact('product_detail','banner_danhmuc','keyword','description','title','img_share','product_khac','album_hinh','cateProduct','productSameCate'));
+			return view('templates.product_detail_tpl', compact('product_detail','banner_danhmuc','keyword','description','title','img_share','product_khac','album_hinh','cateProduct','productSameCate','tintucs'));
 		}else{
 			return redirect()->route('getErrorNotFount');
 		}
@@ -347,17 +358,14 @@ class IndexController extends Controller {
 	public function getNewsDetail($id)
 	{
 		$news_detail = DB::table('news')->select()->where('status',1)->where('com','tin-tuc')->where('alias',$id)->get()->first();
-		
 		if(!empty($news_detail)){
 			$camnhan_khachhang = DB::table('lienket')->select()->where('status',1)->where('com','cam-nhan')->get();
 			$banner_danhmuc = DB::table('lienket')->select()->where('status',1)->where('com','chuyen-muc')->where('link','bai-viet')->get()->first();
 			$quangcao_tintuc = DB::table('lienket')->select()->where('status',1)->where('com','chuyen-muc')->where('link','quang-cao')->get();
 			$tintuc_moinhat_detail = DB::table('news')->select()->where('status',1)->where('com','tin-tuc')->orderby('created_at','desc')->take(6)->get();
-			$tinkhac = DB::table('news')->where('status',1)->where('id','<>',$id)->get();
+			$tinkhac = DB::table('news')->where('status',1)->where('id','<>',$id)->take(7)->get();
 			$hot_news = DB::table('news')->where('status',1)->where('noibat',1)->orderBy('created_at','desc')->take(5)->get();
-
 			$baiviet_khac = DB::table('news')->select()->where('status',1)->where('cate_id','=',$news_detail->cate_id)->where('com','tin-tuc')->orderby('created_at','desc')->get();
-			
 			$com='tin-tuc';
 			$setting = Cache::get('setting');
 			// Cấu hình SEO
@@ -581,9 +589,7 @@ class IndexController extends Controller {
 	    // 	$bill->total = ((Int)str_replace(',', '', $tongtien)); 	
     	// }
     	$detail = [];
-    	    	
     	foreach ($cart as $key) {
-
     		$detail[] = [
     			'product_name' => $key->name,
     			'product_numb' => $key->qty,
@@ -592,8 +598,7 @@ class IndexController extends Controller {
     			'product_code' => $key->options->code
     		];
     	}
-    	// $order['detail'] = json_encode($detail);
-    	
+    	    	
     	$bill->detail = json_encode($detail);
     	$bill->save();
     	Cart::destroy();

@@ -21,7 +21,7 @@
       @include('admin.messages_error')
         <div class="box-body">
           
-          <form name="frmAdd" method="post" action="admin/banner/edit/{{$data->id}}" enctype="multipart/form-data">
+          <form name="frmAdd" method="post" action="backend/banner/edit/{{$data->id}}" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
             <div class="form-group @if ($errors->first('fImages')!='') has-error @endif">
                 <div class="form-group" >

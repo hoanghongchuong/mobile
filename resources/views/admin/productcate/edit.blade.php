@@ -21,7 +21,7 @@
     <div class="box">
     	@include('admin.messages_error')
         <div class="box-body">
-        	<form method="post" action="admin/productcate/edit?id={{$id}}" enctype="multipart/form-data">
+        	<form method="post" action="backend/productcate/edit?id={{$id}}" enctype="multipart/form-data">
         		<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
       			<div class="nav-tabs-custom">
 	                <ul class="nav nav-tabs">
@@ -68,6 +68,10 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>
+									<div class="form-group">
+										<label for="">Mô tả</label>
+										<textarea name="description" rows="5" id="txtContent" class="form-control">{{$data->description}}</textarea>
+									</div>
 								</div>
 							</div>
 							<div class="clearfix"></div>
@@ -111,7 +115,7 @@
 			    <div class="box-footer col-md-12 row">
 					<div class="col-md-6">
 				    	<button type="submit" class="btn btn-primary">Cập nhật</button>
-				    	<button type="button" onclick="javascript:window.location='admin/productcate'" class="btn btn-danger">Thoát</button>
+				    	<button type="button" onclick="javascript:window.location='backend/productcate'" class="btn btn-danger">Thoát</button>
 			    	</div>
 			  	</div>
 		    </form>

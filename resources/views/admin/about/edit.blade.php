@@ -20,7 +20,7 @@
     <div class="box">
     	@include('admin.messages_error')
         <div class="box-body">
-        	<form method="post" action="admin/about/edit?type={{ @$_GET['type'] }}">
+        	<form method="post" action="backend/about/edit?type={{ @$_GET['type'] }}">
         		<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
         		
       			<div class="nav-tabs-custom">

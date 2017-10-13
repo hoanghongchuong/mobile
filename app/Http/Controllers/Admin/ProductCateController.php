@@ -38,7 +38,7 @@ class ProductCateController extends Controller {
         $cate->photo = $img_name;
         $cate->title = $request->txtTitle;
         $cate->keyword = $request->txtKeyword;
-        $cate->description = $request->txtDescription;
+        $cate->description = $request->description;
         $cate->stt = $request->stt;
 
         if($request->status=='on'){
@@ -101,7 +101,7 @@ class ProductCateController extends Controller {
             $product_cate->alias = changeTitle($request->txtName);
             $product_cate->title = $request->txtTitle;
             $product_cate->keyword = $request->txtKeyword;
-            $product_cate->description = $request->txtDescription;
+            $product_cate->description = $request->description;
             $product_cate->stt = $request->stt;
 
             if($request->status=='on'){

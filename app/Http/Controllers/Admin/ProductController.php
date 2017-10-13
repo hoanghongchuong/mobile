@@ -19,19 +19,17 @@ class ProductController extends Controller
     {
         //$data = Products::select('id','name','photo','price','parent_id','alias')->orderBy('id','DESC')->get()->toArray();
         $data = Products::all();
-        
         return view('admin.product.list', compact('data'));
     }
     public function getAdd()
     {
         $data = Products::all();
         $parent = ProductCate::all();
-        $thuonghieus = ThuongHieu::all();
-        return view('admin.product.add', compact('data','parent','thuonghieus'));
+        // $thuonghieus = ThuongHieu::all();
+        return view('admin.product.add', compact('data','parent'));
     }
     public function postAdd(ProductRequest $request)
     {
-
         $img = $request->file('fImages');
         $path_img='upload/product';
         $img_name='';
@@ -39,10 +37,7 @@ class ProductController extends Controller
             $img_name=time().'_'.$img->getClientOriginalName();
             $img->move($path_img,$img_name);
         }
-
         $product = new Products;
-        
-
         $product->name = $request->txtName;
         if($request->txtPrice!=''){
             $product->price = str_replace(",", "", $request->txtPrice);
@@ -68,7 +63,6 @@ class ProductController extends Controller
         $product->mota = $request->txtDesc;
         $product->photo = $img_name;
 
-        $product->thuonghieu_id = $request->txtThuonghieu;
         $product->baohanh = $request->txtBaohanh;
         $product->vanchuyen = $request->txtVanchuyen;
         $product->huongdan = $request->txtHuongdan;
@@ -102,7 +96,14 @@ class ProductController extends Controller
         }else{
             $product->tinhtrang = 0;
         }
-        $product->user_id       = Auth::user()->id;
+        $product->user_id = Auth::user()->id;
+        $product->properties = implode('###',$request->properties);
+
+        //     if(isset($_POST['number'])){
+        //     $number = $_POST['number'];
+        //     $product->number_id = implode(',', $number);
+        // }
+         
         $product->save();
         $product_id = $product->id;
         if ($request->hasFile('detailImg')) {
@@ -137,7 +138,7 @@ class ProductController extends Controller
         //Tìm article thông qua mã id tương ứng
         //$data = Products::findOrFail($id);
         $data = Products::find($id);
-        $thuonghieu = ThuongHieu::all();
+       
         if(!empty($data)){
             if($request->get('hienthi')>0){
                 if($data->status == 1){
@@ -170,7 +171,7 @@ class ProductController extends Controller
             $product = Products::select('stt')->orderBy('id','asc')->get()->toArray();
             $product_img = Products::find($id)->pimg;
             // Gọi view edit.blade.php hiển thị bải viết
-            return view('admin.product.edit',compact('data','product','id','parent','product_img','thuonghieu'));
+            return view('admin.product.edit',compact('data','product','id','parent','product_img'));
         }else{
             $data = Products::all();
             $parent = ProductCate::orderBy('stt', 'asc')->get()->toArray();
@@ -236,8 +237,6 @@ class ProductController extends Controller
             }else{
                 $product->price_old =0;
             }
-
-            $product->thuonghieu_id = $request->txtThuonghieu;
             $product->baohanh = $request->txtBaohanh;
             $product->vanchuyen = $request->txtVanchuyen;
             $product->huongdan = $request->txtHuongdan;
@@ -245,7 +244,7 @@ class ProductController extends Controller
             $product->quatang = $request->txtQuatang;
             $product->model = $request->txtModel;
             $product->code = $request->txtCode;
-
+            $product->properties = implode('###',$request->properties);
             $product->mota = $request->txtDesc;
             $product->title = $request->txtTitle;
             $product->content = $request->txtContent;

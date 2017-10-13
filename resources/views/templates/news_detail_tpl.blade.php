@@ -2,75 +2,92 @@
 @section('content')
 
 <section class="vk-content">
-    <div class="vk-breadcrumb">
-        <nav class="container">
-            <ul class="vk-list vk-list--inline vk-list__breadcrumb">
-                <li class="vk-list__item"><a href="{{url('')}}">Trang chủ</a></li>
-
-                <li class="vk-list__item"> <a href="{{url('cam-nang')}}">Cẩm nang</a></li>
-                <li class="vk-list__item">{{$news_detail->name}}</li>
-            </ul>
-        </nav>
-    </div>
-    <!--./vk-breadcrumb-->
-
-    <div class="vk-banner">
-        <div class="container">
-            <div class="vk-banner__content">
-                <div class="vk-img vk-img--cover">
-                   
-                </div>
-            </div> <!--./vk-banner__content-->
-        </div> <!--./container-->
-    </div><!--./vk-banner-->
-
-    <div class="vk-page vk-page--news">
-
-        <div class="container">
-
-            <div class="vk-news-detail">
-                <h1 class="vk-news-detail__title">{{$news_detail->name}}</h1>
-                <p class="vk-news-detail__published">{{$news_detail->created_at}}</p>
-
-                <div class="vk-news-detail__content">                    
-
-                </div> <!--./vk-news-detail__content-->
-            </div> <!--./vk-news-detail-->
-
-        </div> <!--./container-->
-
-        <div class="vk-shop-related vk-news--related">
-
+    <div class="vk-page news news-detail">
+        <div class="vk-news-detail">
             <div class="container">
-                <h3 class="vk-shop-related__heading vk-heading vk-heading--line text-uppercase"><span>Bài viết liên quan</span></h3>
 
-                <div class="row vk-news__list" data-slider="news-related">
-                    <?php $newsmore = DB::table('news')->where('cate_id',$news_detail->cate_id)->where('id','<>',$news_detail->id)->get(); ?>
-                    @foreach($newsmore as $item)
-                    <div class="col-lg-4 _item">
-                        <div class="vk-news-item vk-news-item--grid">
-                            <div class="vk-img vk-img--cover">
-                                <a href="{{url('cam-nang/'.$item->alias.'.html')}}" title="{{$item->name}}">
-                                    <img src="{{asset('upload/news/'.$item->photo)}}" alt="{{$item->name}}" class="vk-img__img">
-                                </a>
-                            </div>
 
-                            <div class="vk-news-item__brief">
-                                <h3 class="vk-news-item__title"><a href="{{url('cam-nang/'.$item->alias.'.html')}}" title="Giải đáp 11 thắc mắc về chăm sóc tóc">{{$item->name}}</a></h3>
-                            </div>
-                        </div> <!--./vk-news-item-->
+                <div class="vk-ads-wide left">
+                    <div class="vk-ads-wide__frame">
+                        <a href="#" title="">
+                            <img src="{{asset('public/images/ads/ads-1.jpg')}}" class="img-fluid" alt="">
+                        </a>
+
                     </div>
-                    @endforeach    
                 </div>
 
-            </div>
-            <!-- /.container -->
+                <div class="vk-ads-wide right">
+                    <div class="vk-ads-wide__frame">
+                        <a href="#" title="">
+                            <img src="{{asset('public/images/ads/ads-2.jpg')}}" class="img-fluid" alt="">
+                        </a>
 
-        </div>
+                    </div>
+                </div>
 
+                <nav class="vk-breadcrumb">
+                    <ul class="vk-list vk-list-inline vk-list-breadcrumb">
+                        <li><a href="{{url('')}}">Trang chủ</a></li>
 
+                        <li><a href="{{url('tin-tuc')}}">Tin công nghệ</a></li>
 
-    </div> <!--./vk-page-->
+                        <li class="active">{{$news_detail->name}}</li>
+                    </ul>
+                </nav>
+                <!--./vk-breadcrumb-->
+                <div class="row">
+                    <div class="col-lg-8 vk-left-content">
+                        <div class="vk-news-detail-content">
+                            <h1 class="vk-title text-uppercase">{{$news_detail->name}}</h1>
+                            {!!$news_detail->content!!}
+                             <div class="vk-comment">
+                                <div class="fb-comments" data-href="{{url('tin-tuc/'.$news_detail->alias.'.html')}}" data-numposts="2"></div>
+                            </div>
+                            <div class="vk-news-related">
+                                <h3 class="vk-heading style-1 text-uppercase">Tin tức liên quan</h3>
+                                <ul class="vk-list vk-list-icon vk-list-link-related">
+                                    @foreach($tinkhac as $item)
+                                    <li><a href="{{url('tin-tuc/'.$item->alias.'.html')}}"> {{$item->name}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div> <!--./vk-news-detail-content-->
+                    </div> <!--./vk-left-content-->
 
+                    <div class="col-lg-4 vk-right-content">
+                        <div class="vk-inner-content">
+                            <div class="vk-news-hot">
+                                <h3 class="vk-heading style-2 inverse text-uppercase">Tin tức nổi bật</h3>
+                                <div class="vk-news-list">
+                                    @foreach($hot_news as $hotNews)
+                                    <div class="vk-news-item-3">
+                                        <div class="vk-img-frame">
+                                            <a href="{{url('tin-tuc/'.$hotNews->alias.'.html')}}" class="vk-img">
+                                                <img src="{{asset('upload/news/'.$hotNews->photo)}}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="vk-news-item-brief">
+                                            <h3 class="vk-title"><a href="{{url('tin-tuc/'.$hotNews->alias.'.html')}}">{{$hotNews->name}}</a></h3>
+                                            <div class="vk-published">{{date('d/m/Y', strtotime($hotNews->created_at))}}</div>
+                                        </div>
+                                    </div> <!--./vk-news-item-3-->
+                                    @endforeach
+                                </div>
+                            </div> <!--./vk-news-hot-->
+
+                            <div class="vk-ads pt-2">
+                                <div class="vk-img-frame">
+                                    <img src="{{asset('public/images/ads/2.jpg')}}" alt="">
+                                </div>
+                            </div> <!--./vk-ads-->
+
+                        </div><!-- /.vk-inner-content -->
+
+                    </div> <!--./vk-right-content-->
+
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div> <!--./vk-news-detail-->
+    </div><!--./vk-page-->
 </section>
 @endsection

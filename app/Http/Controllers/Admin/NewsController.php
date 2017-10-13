@@ -254,7 +254,7 @@ class NewsController extends Controller
             $news->user_id       = Auth::user()->id;
 
             $news->save();
-            return redirect('admin/news/edit?id='.$id.'&type='.$com)->with('status','Cập nhật thành công');
+            return redirect('backend/news/edit?id='.$id.'&type='.$com)->with('status','Cập nhật thành công');
         }else{
             return redirect()->back()->with('status','Dữ liệu không có thực');
         }

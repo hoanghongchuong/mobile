@@ -121,7 +121,7 @@
                                         <td class="text-center">
                                             <i class="fa fa-trash-o fa-fw">
                                             </i>
-                                            <a href="admin/contact/delete/{{$item->id}}" onclick="if(!confirm('Xác nhận xóa')) return false;">
+                                            <a href="backend/contact/delete/{{$item->id}}" onclick="if(!confirm('Xác nhận xóa')) return false;">
                                                 Delete
                                             </a>
                                         </td>

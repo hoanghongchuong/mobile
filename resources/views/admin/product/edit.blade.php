@@ -20,7 +20,7 @@
     <div class="box">
     	@include('admin.messages_error')
         <div class="box-body">
-        	<form method="post" name="frmEditProduct" action="admin/product/edit?id={{$id}}" enctype="multipart/form-data">
+        	<form method="post" name="frmEditProduct" action="backend/product/edit?id={{$id}}" enctype="multipart/form-data">
         		<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
         		
       			<div class="nav-tabs-custom">
@@ -70,19 +70,7 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>
-									<div class="form-group">
-										<label for="">Thương hiệu</label>
-										<select name="txtThuonghieu" class="form-control" id="">
-											<option value="">Chọn thương hiệu</option>
-											 @foreach($thuonghieu as $pro)
-							                    <option @if($pro->id == $data->thuonghieu_id)
-							                      {{"selected"}}
-							                      @endif 
-							                    value="{{$pro->id}}">{{$pro->name}}
-							                    </option>
-							                    @endforeach
-										</select>
-									</div>
+									
 									
 								</div>
 								<div class="col-md-6 col-xs-12">
@@ -93,6 +81,20 @@
 									<div class="form-group">
 								      	<label for="ten">Mã SP</label>
 								      	<input type="text" name="txtCode"  value="{{ $data->code }}"  class="form-control" />
+									</div>
+									<div class="form-group">
+										<label for="">Thuộc tính</label>
+										<?php $properties = explode('###', $data->properties) ?>
+										@for($i=0; $i< count($properties); $i++)
+										<div id="a">
+											<div class="con">
+											  	<input id="Text1" type="text" class="" name="properties[]" value="{{$properties[$i]}}" />
+											  	<input type="button" class="btnRemove" id="btn-Remove" value="Remove"/>
+										  	</div>
+										</div>
+										@endfor
+										<input id="btnAdd"  class="add-properties" type="button" value="Add" />
+
 									</div>
 									<!-- <div class="form-group">
 								      	<label for="ten">Giảm giá</label>

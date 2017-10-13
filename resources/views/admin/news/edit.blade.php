@@ -9,7 +9,7 @@
     <small>@yield('action')</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="backend"><i class="fa fa-dashboard"></i> Home</a></li>
     <li><a href="javascript:">@yield('controller')</a></li>
     <li class="active">@yield('action')</li>
   </ol>
@@ -20,7 +20,7 @@
     <div class="box">
     	@include('admin.messages_error')
         <div class="box-body">
-        	<form method="post" action="admin/news/edit?id={{$id}}&type={{ @$_GET['type'] }}" enctype="multipart/form-data">
+        	<form method="post" action="backend/news/edit?id={{$id}}&type={{ @$_GET['type'] }}" enctype="multipart/form-data">
         		<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
         		
       			<div class="nav-tabs-custom">
@@ -165,7 +165,7 @@
 			    	<div class="row">
 						<div class="col-md-6">
 					    	<button type="submit" class="btn btn-primary">Cập nhật</button>
-					    	<button type="button" class="btn btn-danger" onclick="javascript:window.location='admin/news?type={{ @$_GET['type'] }}'">Thoát</button>
+					    	<button type="button" class="btn btn-danger" onclick="javascript:window.location='backend/news?type={{ @$_GET['type'] }}'">Thoát</button>
 				    	</div>
 			    	</div>
 			  	</div>

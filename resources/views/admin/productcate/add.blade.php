@@ -65,6 +65,10 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>
+									<div class="form-group">
+										<label for="">Mô tả</label>
+										<textarea name="description" rows="5" id="txtContent" class="form-control"></textarea>
+									</div>
 								</div>
 							</div>
 							<div class="clearfix"></div>
@@ -109,7 +113,7 @@
 			    	<div class="row">
 						<div class="col-md-6">
 					    	<button type="submit" class="btn btn-primary">Lưu</button>
-					    	<button type="button" onclick="javascript:window.location='admin/productcate'" class="btn btn-danger">Thoát</button>
+					    	<button type="button" onclick="javascript:window.location='backend/productcate'" class="btn btn-danger">Thoát</button>
 				    	</div>
 			    	</div>
 			  	</div>

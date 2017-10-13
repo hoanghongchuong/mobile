@@ -61,3 +61,7 @@
     background: #6d2c2c !important;
     color: #fff !important;
 }
+.vk-news-detail-content img{
+    max-width: 100%;
+    height: auto;
+}

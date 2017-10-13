@@ -738,7 +738,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 
 .vk-shop-detail-content p { margin-bottom: 10px; }
 
-.vk-comment { padding-bottom: 50px; }
+.vk-comment { padding-bottom: 0px; }
 
 .vk-product-about { font-size: 14px; }
 

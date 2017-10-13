@@ -21,7 +21,7 @@
       @include('admin.messages_error')
         <div class="box-body">
           
-          <form name="frmAdd" method="post" action="{{ asset('admin/district/edit/'.$district->id) }}" >
+          <form name="frmAdd" method="post" action="{{ asset('backend/district/edit/'.$district->id) }}" >
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                           
             <div class="clearfix"></div>

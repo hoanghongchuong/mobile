@@ -21,7 +21,7 @@
     <div class="box">
     	@include('admin.messages_error')
         <div class="box-body">
-        	<form method="post" action="admin/menu/edit?id={{$id}}&type={{ @$_GET['type'] }}" enctype="multipart/form-data">
+        	<form method="post" action="backend/menu/edit?id={{$id}}&type={{ @$_GET['type'] }}" enctype="multipart/form-data">
         		<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
       			<div class="nav-tabs-custom">
 	                <ul class="nav nav-tabs">
@@ -97,7 +97,7 @@
 			    <div class="box-footer col-md-12 row">
 					<div class="col-md-6">
 				    	<button type="submit" class="btn btn-primary">Cập nhật</button>
-				    	<button type="button" onclick="javascript:window.location='admin/menu?type={{ @$_GET[type] }}'" class="btn btn-danger">Thoát</button>
+				    	<button type="button" onclick="javascript:window.location='backend/menu?type={{ @$_GET[type] }}'" class="btn btn-danger">Thoát</button>
 			    	</div>
 			  	</div>
 		    </form>

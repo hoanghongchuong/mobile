@@ -13,7 +13,7 @@
                     <li class="vk-list__item"><a href="about.html" title="Giới thiệu">Giới thiệu</a></li>
                     <li class="vk-list__item"><a href="product-list.html" title="Sản phẩm">Sản phẩm</a></li>
                     <li class="vk-list__item"><a href="news-list.html" title="Tin tức">Tin tức</a></li>
-                    <li class="vk-list__item"><a href="news-list.html" title="Tư vấn thiết kế">Tư vấn thiết kế</a></li>
+                    <!-- <li class="vk-list__item"><a href="news-list.html" title="Tư vấn thiết kế">Tư vấn thiết kế</a></li> -->
                     <li class="vk-list__item"><a href="contact.html" title="Liên hệ">Liên hệ</a></li>
                 </ul> <!--./vk-menu__footer-->
 
@@ -95,7 +95,7 @@
             <div class="vk-footer__bot-content d-flex flex-column flex-lg-row justify-content-between align-items-center">
                 <p class="mb-0">© GCO GROUP 2017. All rights reserved</p>
                 <div class="vk-visa">
-                    <img src="images/other/visa-list.png" class="img-fluid" alt="">
+                    <img src="{{asset('public/images/other/visa-list.png')}}" class="img-fluid" alt="">
                 </div>
             </div>
         </div>

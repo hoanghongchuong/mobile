@@ -18,7 +18,7 @@
       listid=listid.substr(1);   //alert(listid);
       if (listid=="") { alert("Bạn chưa chọn mục nào"); return false;}
       hoi= confirm("Bạn có chắc chắn muốn xóa?");
-      if (hoi==true) document.location = homeUrl()+"/admin/slider/"+listid+"/deleteList?type={{@$_GET[type]}}";
+      if (hoi==true) document.location = homeUrl()+"/backend/slider/"+listid+"/deleteList?type={{@$_GET[type]}}";
     });
   });
 </script>
@@ -28,7 +28,7 @@
     <small>@yield('action')</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="backend"><i class="fa fa-dashboard"></i> Home</a></li>
     <li><a href="javascript:">@yield('controller')</a></li>
     <li class="active">@yield('action')</li>
   </ol>
@@ -66,9 +66,9 @@
                 <td class="text-center with_dieuhuong">
                   <div class="form-group"> 
                     @if($item->status>0)
-                      <a href="admin/slider/edit?id={{$item->id}}&hienthi={{ time() }}&type={{ @$_GET['type'] }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Hiển thị</a>
+                      <a href="backend/slider/edit?id={{$item->id}}&hienthi={{ time() }}&type={{ @$_GET['type'] }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Hiển thị</a>
                     @else
-                      <a href="admin/slider/edit?id={{$item->id}}&hienthi={{ time() }}&type={{ @$_GET['type'] }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Hiển thị</a>
+                      <a href="backend/slider/edit?id={{$item->id}}&hienthi={{ time() }}&type={{ @$_GET['type'] }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Hiển thị</a>
                     @endif
                   </div>
                   <!-- <div class="form-group"> 
@@ -80,7 +80,7 @@
                   </div> -->
                 </td>
                 <td class="text-center with_dieuhuong">
-                  <i class="fa fa-pencil fa-fw"></i><a href="admin/slider/edit?id={{$item->id}}&type={{ @$_GET['type'] }}">Edit</a>
+                  <i class="fa fa-pencil fa-fw"></i><a href="backend/slider/edit?id={{$item->id}}&type={{ @$_GET['type'] }}">Edit</a>
                 </td>
                 <td class="text-center">
                   <i class="fa fa-trash-o fa-fw"></i><a onClick="if(!confirm('Xác nhận xóa')) return false;" href="admin/slider/{{$item->id}}/delete?type={{ @$_GET['type'] }}">Delete</a>
@@ -93,7 +93,7 @@
         <div class="box-footer col-md-12">
           <div class="row">
             <div class="col-md-6">
-              <input type="button" onclick="javascript:window.location='admin/slider/add?type={{ @$_GET[type] }}'" value="Thêm" class="btn btn-primary" />
+              <input type="button" onclick="javascript:window.location='backend/slider/add?type={{ @$_GET[type] }}'" value="Thêm" class="btn btn-primary" />
               <button type="button" id="xoahet" class="btn btn-success">Xóa</button>
               <input type="button" value="Thoát" onclick="javascript:window.location='admin'" class="btn btn-danger" />
 

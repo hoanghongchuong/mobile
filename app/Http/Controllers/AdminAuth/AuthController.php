@@ -26,7 +26,7 @@ class AuthController extends Controller {
     | a simple trait to add these behaviors. Why don't you explore it?
     |
     */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = 'backend';
     
     use AuthenticatesUsers;
 
@@ -55,7 +55,7 @@ class AuthController extends Controller {
         $thanhvien->password = Hash::make($request->password);
         $thanhvien->remember_token = $request->_token;
         $thanhvien->save();
-        return redirect('admin/login');
+        return redirect('backend/login');
     }
     public function getLogin()
     {
@@ -72,9 +72,9 @@ class AuthController extends Controller {
         $remember = $request->remember ? true : false;
 
         if (Auth::attempt($auth, $remember)) {
-            return redirect('admin')->with('flash_notice', 'Đăng nhập thành công.');;
+            return redirect('backend')->with('flash_notice', 'Đăng nhập thành công.');;
         }else{
-            return redirect('admin/login')->with('flash_error', 'Tên đăng nhập hoặc mật khẩu không đúng.')
+            return redirect('backend/login')->with('flash_error', 'Tên đăng nhập hoặc mật khẩu không đúng.')
             ->withInput();;
         }
     }

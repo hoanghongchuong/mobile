@@ -1,269 +1,231 @@
 @extends('index')
 @section('content')
-
-   <section class="vk-content">
-
-        <div class="vk-breadcrumb">
-            <nav class="container">
-                <ul class="vk-list vk-list--inline vk-list__breadcrumb">
-                    <li class="vk-list__item"><a href="index.html">Trang chủ</a></li>
-                    <li class="vk-list__item"> <a href="{{url('san-pham/'.$cateProduct->alias)}}">{{$cateProduct->name}}</a></li>
-                    <li class="vk-list__item">{{$product_detail->name}}</li>
-                </ul>
-            </nav>
-        </div>
-        <!--./vk-breadcrumb-->
-
-        <div class="vk-banner">
+<section class="vk-content">
+    <div class="vk-page product product-detail">
+        <div class="vk-product-detail">
             <div class="container">
-                <div class="vk-banner__content">
-                    <div class="vk-img vk-img--cover">
-                        <img src= "{{asset('public/images/banner/banner-1.jpg')}}" alt="">
+                <div class="vk-ads-wide left">
+                    <div class="vk-ads-wide__frame">
+                        <a href="#" title="">
+                            <img src="{{asset('public/images/ads/ads-1.jpg')}}" class="img-fluid" alt="">
+                        </a>
+
                     </div>
-                </div> <!--./vk-banner__content-->
-            </div> <!--./container-->
-        </div><!--./vk-banner-->
+                </div>
 
-        <div class="vk-page vk-page--shop">
-            <div class="container">
-                <div class="vk-shop-detail">
-                    <div class="vk-shop-detail__top row">
-                        <div class="vk-shop-detail__left col-lg-6">
-                            <div class="vk-shop-detail__thumbnail-wrapper">
-                                <div class="vk-shop-detail__thumbnail">
-                                    <div class="vk-slider__for" data-slider="slider-for">
-                                        @foreach($album_hinh as $album)
-                                            <div class="vk-img vk-img--mw100">
-                                                <img src="{{asset('upload/hasp/'.$album->photo)}}" alt="">
-                                            </div>
-                                        @endforeach 
+                <div class="vk-ads-wide right">
+                    <div class="vk-ads-wide__frame">
+                        <a href="#" title="">
+                            <img src="{{asset('public/images/ads/ads-2.jpg')}}" class="img-fluid" alt="">
+                        </a>
+
+                    </div>
+                </div>
+
+                <nav class="vk-breadcrumb">
+                    <ul class="vk-list vk-list-inline vk-list-breadcrumb">
+                        <li><a href="index.html">Trang chủ</a></li>
+
+                        <li><a href="product-list-level-2.html">Iphone 7</a></li>
+
+                        <li><a href="product-list.html">Sản phẩm</a></li>
+
+                        <li class="active">{{$product_detail->name}}</li>
+                    </ul>
+                </nav>
+                <!--./vk-breadcrumb-->
+                <div class="vk-product-detail-top">
+
+                    <div class="vk-shop-detail ">
+                        <h1 class="vk-shop-detail__title">{{$product_detail->name}}</h1>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="vk-image-product-main vk-slider slider-for">
+                                    <div class="vk-img-frame">
+                                        <img src="{{asset('public/images/shop/shop-thumbnail-1.jpg')}}" alt="">
                                     </div>
-                                </div> <!--./slider-for-->
-                                <div class="vk-shop-detail__thumbnail-list vk-slider" >
-                                    <div class="vk-slider__nav" data-slider="slider-nav">
-                                         @foreach($album_hinh as $album)
-                                            <div class="vk-img vk-img--mw100">
-                                                <img src="{{asset('upload/hasp/'.$album->photo)}}" alt="">
-                                            </div>
-                                        @endforeach 
+                                    <div class="vk-img-frame">
+                                        <img src="{{asset('public/images/shop/shop-thumbnail-1.jpg')}}" alt="">
                                     </div>
-                                </div> <!--./slider-for-->
-                            </div> <!--./vk-shop-detail__thumbnail-wrapper-->
-
-                        </div> <!--./vk-shop-detail__left-->
-
-                        <div class="vk-shop-detail__right col-lg-6">
-
-                            <div class="vk-shop-detail__brief">
-                                <h1 class="vk-shop-detail__title">{{$product_detail->name}} </h1>
-
-                                <div class="vk-shop-detail__box">
-
-                                    <p class="vk-shop-detail__price vk-text--yellow-1">{{number_format($product_detail->price)}} ₫ </p>
-
-                                    <div class="vk-shop-detail__brief-short">
-                                        <p>Thương hiệu: Chanel</p>
-                                        <p>Mã sản phẩm: {{$product_detail->code}}</p>
-                                        <p>Tình trạng: Còn hàng</p>
+                                    <div class="vk-img-frame">
+                                        <img src="{{asset('public/images/shop/shop-thumbnail-1.jpg')}}" alt="">
                                     </div>
-
-                                    <div class="vk-shop-detail__des">
-                                        <p><strong>Mô tả:</strong></p>
-                                        <p>{!!$product_detail->mota!!}</p>
+                                    <div class="vk-img-frame">
+                                        <img src="{{asset('public/images/shop/shop-thumbnail-1.jpg')}}" alt="">
                                     </div>
-                                    <form action="{{ route('addProductToCart') }}" method="post">
+                                    <div class="vk-img-frame">
+                                        <img src="{{asset('public/images/shop/shop-thumbnail-1.jpg')}}" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="vk-image-product-thumbnails vk-slider slider-nav vk-slider-arrow-style-2">
+                                    <div class="vk-img-frame">
+                                        <img src="{{asset('public/images/shop/shop-thumbnail-sub-1.jpg')}}" alt="">
+                                    </div>
+                                    <div class="vk-img-frame">
+                                        <img src="{{asset('public/images/shop/shop-thumbnail-sub-1.jpg')}}" alt="">
+                                    </div>
+                                    <div class="vk-img-frame">
+                                        <img src="{{asset('public/images/shop/shop-thumbnail-sub-1.jpg')}}" alt="">
+                                    </div>
+                                    <div class="vk-img-frame">
+                                        <img src="{{asset('public/images/shop/shop-thumbnail-sub-1.jpg')}}" alt="">
+                                    </div>
+                                    <div class="vk-img-frame">
+                                        <img src="{{asset('public/images/shop/shop-thumbnail-sub-1.jpg')}}" alt="">
+                                    </div>
+                                </div>
+
+                            </div> <!--./col-4-->
+
+                            <div class="col-lg-5">
+                                <div class="vk-shop-detail-brief">
+                                    <p class="vk-product__id">Mã sản phẩm: <span>{{$product_detail->code}}</span></p>
+                                    <p class="mb-2"><strong>THÔNG TIN SẢN PHẨM</strong></p>
+
+                                    <ul class="vk-list vk-list-icon">
+                                        <?php $properties = explode('###', $product_detail->properties); ?>
+                                        @for($i=0; $i< count($properties); $i++)
+                                        <li>{{$properties[$i]}}</li>
+                                        @endfor
+                                        
+                                    </ul>
+                                    <p class="vk-shop-detail__price">{{number_format($product_detail->price)}} VNĐ</p>
+                                    <div class="vk-shop__sale">
+                                        <p class="_sale">Giảm thêm 800.000đ khi thanh toán trực tuyến bằng
+                                            MasterCard</p>
+                                        <p class="_highlight">* Không áp dụng khi mua trả góp 0% bằng thẻ tín
+                                            dụng HSBC</p>
+                                        <p class="_highlight">* 1 đổi 1 trong 1 tháng với sản phẩm lỗi</p>
+                                    </div>
+                                </div>
+                            </div> <!--./col-8-->
+                            <div class="col-lg-3 vk-right-content">
+                                <div class="vk-shop-detail-part">
+                                    <div class="vk-shop-detail-part__hotline">
+                                        <label for="">Hỗ trợ mua sản phẩm</label>
+                                        <a href="callto:+1-800-234-5677" class="vk-text">+1-800-234-5677</a>
+                                    </div>
+                                     <form action="{{ route('addProductToCart') }}" method="post">
                                         {!! csrf_field() !!}
                                         <input type="hidden" name="product_id" value="{{ $product_detail->id }}">
-                                        <div class="vk-button">
-                                            <div class="vk-calculator" data-calculator="true">
-                                                <input type="number" name="product_numb" id="soluong" value="1" min="1" class="form-control order-2">
-                                                <button class="vk-calculator__button vk-btn vk-btn--minus order-1"
-                                                        data-index="minus">
-                                                    <i class="_icon fa fa-minus"></i>
+                                        <div class="vk-quantity">
+                                            <label for="">Số lượng sản phẩm</label>
+                                            <div class="vk-calculator d-inline-flex fix-1" data-calculator="true">
+                                                <input type="number" class="form-control order-2 quantity" min="1"
+                                                       name="product_numb"
+                                                       id="6" rel="6" value="1">
+                                                <button class="vk-btn vk-btn-minus cal-item order-1" data-index="minus">
+                                                    <i class="fa fa-minus"></i>
                                                 </button>
-                                                <button class="vk-calculator__button vk-btn vk-btn--plus order-3" data-index="plus">
-                                                    <i class="_icon fa fa-plus"></i>
+                                                <button class="vk-btn vk-btn-plus cal-item order-3" data-index="plus"><i
+                                                        class="fa fa-plus"></i>
                                                 </button>
-                                            </div> <!--./calculator-->
-
-                                            <!-- <a href="#"  title="" class="vk-btn vk-btn--now text-uppercase">Mua ngay</a> -->
-                                            <button type="submit">Mua ngay</button>
-                                        </div>
-                                    </form>
-                                </div> <!--./vk-shop-detail__box-->
-
-                            </div> <!--./vk-shop-detail__brief-->
-
-
-                        </div><!-- /.vk-shop-detail__right -->
-                    </div> <!--./vk-shop-detail__top-->
-
-                    <div class="vk-shop-detail__bottom">
-
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                   aria-controls="home" aria-expanded="true">Thông tin sản phẩm </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                   aria-controls="profile">Đánh giá</a>
-                            </li>
-
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                {!!$product_detail->content!!}
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="fb-comments" data-href="{{url('san-pham/'.$product_detail->alias.'.html')}}" data-numposts="3"></div>
-                            </div>
-                        </div>
-
-                    </div> <!--./vk-shop-detail__bottom-->
-
-
-                </div> <!--./vk-shop-detail-->
-                <!-- /.row -->
-            </div>
-            <!-- /.container -->
-
-            <div class="vk-shop-related">
-
-                <div class="container">
-                    <h3 class="vk-shop-related__heading vk-heading vk-heading--line text-uppercase"><span>Sản phẩm cùng loại</span></h3>
-                    <div class="row vk-slider vk-slider--arrow-1 vk-shop-item__list" data-slider="related">
-                    @foreach($productSameCate as $key=>$item)
-
-                        <div class="col-sm-6 col-md-4 col-lg-3 _item">
-                            <div class="vk-shop-item__wrapper">
-                                <div class="vk-shop-item">
-                                    <div class="vk-img vk-img--mw100">
-                                        <a href="#item{{$key}}" title="{{$item->name}}" class="vk-img__link" data-toggle="modal" data-target="#item{{$key}}">
-                                            <img src="{{asset('upload/product/'.$item->photo)}}" alt="{{$item->name}}" class="vk-img__img">
-                                        </a>
-                                    </div>
-
-                                    <div class="vk-shop-item__brief">
-                                        <h3 class="vk-shop-item__title"><a href="{{url('san-pham/'.$item->alias.'.html')}}" title="{{$item->name}}">{{$item->name}}</a></h3>
-                                        <p class="vk-shop-item__price vk-text--red-1">{{number_format($item->price)}} ₫</p>
-                                    </div>
-
-                                </div> <!--./vk-shop-item-->
-                            </div>
-                            <!-- /.vk-shop-item__wrapper -->
-
-                        </div>
-                    @endforeach
-
-                    </div>
-
-                    <div class="vk-shop-modal__list">
-                    @foreach($productSameCate as $k=>$productDetail)
-                        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="item{{$k}}">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <button type="button" class="close vk-btn vk-btn--close" data-dismiss="modal" aria-label="Close">X</button>
-
-                                    <div class="vk-shop-detail vk-shop-detail--quickview">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="vk-shop-detail__left col-lg-6">
-                                                    <div class="vk-shop-detail__thumbnail-wrapper">
-                                                        <div class="vk-shop-detail__thumbnail">
-
-                                                            <div class="vk-slider__for" data-slider="slider-for">
-                                                                <?php $albumImg = DB::table('images')->select()->where('product_id',$productDetail->id)->orderby('id','asc')->get(); ?>
-                                                               @foreach($albumImg as $album)         
-                                                                <div class="vk-img vk-img--mw100">
-                                                                    <img src="{{asset('upload/hasp/'.$album->photo)}}" alt="">
-                                                                </div>
-                                                                @endforeach
-                                                            </div>
-
-                                                        </div> <!--./slider-for-->
-
-                                                        <div class="vk-shop-detail__thumbnail-list vk-slider" >
-
-                                                            <div class="vk-slider__nav" data-slider="slider-nav">
-                                                                @foreach($albumImg as $album)         
-                                                                <div class="vk-img vk-img--mw100">
-                                                                    <img src="{{asset('upload/hasp/'.$album->photo)}}" alt="">
-                                                                </div>
-                                                                @endforeach
-                                                                
-                                                            </div>
-
-
-                                                        </div> <!--./slider-for-->
-                                                    </div> <!--./vk-shop-detail__thumbnail-wrapper-->
-
-                                                </div> <!--./vk-shop-detail__left-->
-
-                                                <div class="vk-shop-detail__right col-lg-6">
-
-                                                    <div class="vk-shop-detail__brief">
-                                                        <h1 class="vk-shop-detail__title">{{$productDetail->name}} </h1>
-
-                                                        <div class="vk-shop-detail__box">
-
-                                                            <p class="vk-shop-detail__price vk-text--red-1">{{number_format($productDetail->price)}} ₫ </p>
-
-                                                            <div class="vk-shop-detail__brief-short">
-                                                                <?php $thuonghieu = DB::table('thuonghieu')->select('name')->where('id',$productDetail->thuonghieu_id)->first(); ?>
-                                                                        <p>Thương hiệu: {{$thuonghieu->name}}</p>
-                                                                <p>Mã sản phẩm: {{$productDetail->code}}</p>
-                                                                <p>Tình trạng: Còn hàng</p>
-                                                            </div>
-
-                                                            <div class="vk-shop-detail__des">
-                                                                <p><strong>Mô tả:</strong></p>
-                                                                {!! $productDetail->mota !!}
-                                                            </div>
-
-                                                            <div class="vk-button">
-                                                               <form action="{{ route('addProductToCart') }}" method="post">
-                                                                    {!! csrf_field() !!}
-                                                                    <input type="hidden" name="product_id" value="{{ $productDetail->id }}">
-                                                                    <div class="vk-calculator" data-calculator="true">
-                                                                        <input type="number" name="product_numb" id="soluong" value="1" min="1" class="form-control order-2">
-                                                                        <button class="vk-calculator__button vk-btn vk-btn--minus order-1"
-                                                                                data-index="minus">
-                                                                            <i class="_icon fa fa-minus"></i>
-                                                                        </button>
-                                                                        <button class="vk-calculator__button vk-btn vk-btn--plus order-3" data-index="plus">
-                                                                            <i class="_icon fa fa-plus"></i>
-                                                                        </button>
-                                                                    </div> <!--./calculator-->
-
-                                                                   <!--  <a href="shopcart.html" title="" class="vk-btn vk-btn--now text-uppercase _inverse">Mua ngay</a> -->
-                                                                    <button type="submit" style="margin-top: 4px;" class="vk-btn vk-btn--now text-uppercase _inverse">Mua ngay</button>
-                                                                </form>
-                                                                <a href="{{url('san-pham/'.$productDetail->alias.'.html')}}" title="" class="vk-btn vk-btn--now text-uppercase _inverse">Chi tiết</a>
-                                                            </div>
-
-                                                        </div> <!--./vk-shop-detail__box-->
-
-                                                    </div> <!--./vk-shop-detail__brief-->
-
-
-                                                </div><!-- /.vk-shop-detail__right -->
-
                                             </div>
                                         </div>
-                                        <!-- /.container -->
-                                    </div> <!--./vk-shop-detail-->
+                                        <div class="vk-button">
+                                            <!-- <a href="#" class="vk-btn vk-btn-addtocart text-uppercase"> Add to cart</a> -->
+                                            <button type="submit" class="vk-btn vk-btn-addtocart text-uppercase">Thêm vào giỏ hàng</button>
+                                        </div>
+                                    </form>
+                                    <div class="vk-policy">
+                                        <label class="mb-0 mt-3" for="">Chính sách khuyến mại</label>
+                                        <ul class="vk-list vk-list-icon">
+                                            <li> Trong hộp có: Sạc, Tai nghe, Sách hướng dẫn, Jack chuyển tai nghe 3.5mm,
+                                                Cáp, Cây lấy sim</li>
+                                            <li> Bảo hành chính hãng: thân máy 12 tháng, sạc 12 tháng, tai nghe 12 tháng</li>
+                                            <li> Giao hàng tận nơi miễn phí trong 30 phút.</li>
+                                        </ul>
+                                    </div>
 
-                                </div>
+                                </div>  <!--./vk-shop-detail-part-->
+                            </div> <!--./vk-right-content-->
+
+                        </div> <!--./row-->
+
+                    </div> <!--./vk-shop-detail-->
+
+
+                </div> <!-- ./vk-product-detail-top-->
+
+
+                <div class="row">
+                    <div class="col-lg-10 vk-left-content order-1 order-lg-1">
+                        <div class="vk-product-detail-bottom">
+                            <!-- <h3 class="vk-heading">Đặc điểm nổi bật của iPhone 7 Plus 128GB</h3> -->
+                            <div class="vk-shop-detail-content">
+                                {!!$product_detail->content!!}
+                            </div> 
+
+                            <div class="vk-comment">
+                                 <div class="fb-comments" data-href="{{url('san-pham/'.$product_detail->alias.'.html')}}" data-numposts="2"></div>
+                            </div> <!--./vk-comment-->
+
+                        </div> <!--./vk-product-detail-bottom-->
+
+                        <div class="vk-product-related ">
+                            <div class="vk-product-list-box">
+                                <h3 class="vk-heading">Các sản phẩm liên quan</h3>
+                                <div class="vk-product-list row vk-slider" data-slider="shop-related">
+                                    @foreach($productSameCate as $product)
+                                    <div class="col-sm-6 col-md-4 col-lg-2 item">
+                                        <div class="vk-shop-item">
+                                            <div class="vk-img-frame">
+                                                <a class="vk-img" href="{{url('san-pham/'.$product->alias.'.html')}}">
+                                                    <img src="{{asset('upload/product/'.$product->photo)}}" alt="">
+                                                </a>
+                                            </div>
+
+                                            <div class="vk-shop-item-brief">
+                                                <h3 class="vk-title"><a href="{{url('san-pham/'.$product->alias.'.html')}}">{{$product->name}}</a></h3>
+                                                <p class="vk-price">Giá: {{number_format($product->price)}} VNĐ</p>
+                                            </div>
+                                        </div> <!--./vk-shop-item-->
+                                    </div> <!--./item-->
+                                    @endforeach
+
+                                </div> <!--./vk-product-list-->
+                            </div> <!--./vk-product-list-box-->
+                        </div> <!--./vk-product-related-->
+                    </div> <!--./vk-left-content-->
+
+                    <div class="col-lg-2 vk-right-content order-3 order-lg-2">
+                        <div class="vk-inner-content">
+                            <div class="vk-product__thumbail-cate pb-3 d-none d-lg-block">
+                                <a href="product-list-level-2.html" title=""><img src="{{asset('public/images/shop/thumbnail-1.jpg')}}" alt="" class="img-fluid"></a>
                             </div>
-                        </div>
-                    @endforeach    
-                    </div> <!--./vk-shop-modal__list-->
-                </div>
-                <!-- /.container -->
 
-            </div>
-        </div> <!--./vk-page-->
+                            <div class="vk-product__thumbail-cate pb-3 d-none d-lg-block">
+                                <a href="product-list-level-2.html" title=""><img src="{{asset('public/images/shop/thumbnail-2.jpg')}}" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="vk-product-sale-off">
+                                <h3 class="vk-heading style-2 inverse text-uppercase">Tin công nghệ</h3>
+                                <div class="vk-product-list">
+                                    @foreach($tintucs as $news)
+                                    <div class="vk-news-item-4">
+                                        <div class="vk-img-frame">
+                                            <a href="{{url('tin-tuc/'.$news->alias.'.html')}}" class="vk-img">
+                                                <img src="{{asset('upload/news/'.$news->photo)}}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="vk-news-item-brief">
+                                            <h3 class="vk-title"><a href="{{url('tin-tuc/'.$news->alias.'.html')}}">{{$news->name}}</a></h3>
+                                            <div class="vk-published">{{date('d/m/Y', strtotime($news->created_at))}}</div>
+                                        </div>
+                                    </div> 
+                                    @endforeach
+                                </div> <!--./vk-product-list-->
+                            </div> <!--./vk-product-sale-off-->
+                        </div> <!--./vk-inner-content-->
 
-    </section>
+                    </div> <!--./vk-right-content-->
+
+
+                </div><!--./row-->
+
+            </div> <!-- /.container -->
+
+        </div> <!--./vk-product-detail-->
+    </div><!--./vk-home-->
+</section>
 @endsection

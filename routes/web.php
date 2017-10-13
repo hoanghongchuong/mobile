@@ -25,11 +25,13 @@ Route::get('tin-tuc/{id}.html',['as'=>'getNewsDetail', 'uses'=>'IndexController@
 Route::get('san-pham',['as'=>'getProduct', 'uses'=>'IndexController@getProduct']);
 Route::get('san-pham/{alias}.html','IndexController@getProductDetail')->name('detailProduct');
 Route::get('san-pham/{id}',['as'=>'getProductList', 'uses'=>'IndexController@getProductList']);
+
+// Route::get('san-pham/{cate}/{alias}',['as'=>'getProductChild', 'uses'=>'IndexController@getProductChild']);
+
 Route::get('thuong-hieu/{alias}','IndexController@getProductByThuongHieu');
 
 Route::get('ajax/province/{id}',['as'=>'loadDistrictByProvince', 'uses'=>'IndexController@loadDistrictByProvince']);
 Route::get('sap-xep','IndexController@SapXep')->name('sapxep');
-
 
 // dang ky, dang nhap
 Route::get('signup','SignupController@signup');
@@ -66,11 +68,11 @@ Route::get('error/404.html',['as'=>'getErrorNotFount', 'uses'=>'IndexController@
 // 	'password' => 'Auth\PasswordController',
 // ]);
 
-Route::get('admin/login',['as'=>'admin.auth.getLogin', 'uses'=>'AdminAuth\AuthController@getLogin']);
-Route::post('admin/postlogin',['as'=>'admin.auth.postLogin', 'uses'=>'AdminAuth\AuthController@postLogin']);
+Route::get('backend/login',['as'=>'admin.auth.getLogin', 'uses'=>'AdminAuth\AuthController@getLogin']);
+Route::post('backend/postlogin',['as'=>'admin.auth.postLogin', 'uses'=>'AdminAuth\AuthController@postLogin']);
 
 
-Route::group(['middleware' =>'authen', 'prefix' => 'admin'], function(){
+Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 	Route::get('/',['as'=>'admin.index', 'uses'=>'Admin\IndexController@getIndex']);
 	Route::get('register',['as'=>'getRegister', 'uses'=>'AdminAuth\AuthController@getRegister']);
 	Route::post('postregister',['as'=>'postRegister', 'uses'=>'AdminAuth\AuthController@postRegister']);

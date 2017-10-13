@@ -2,6 +2,16 @@ $(document).ready(function(){
     $(function () {
 	    $(".textarea").wysihtml5();
 	});
+
+    $("#btnAdd").click(function() {
+        $("#a").append('<div class="con"><input type="text" id="Text1" class="" name="properties[]" value="" />' + '<input type="button" class="btnRemove" id="btn-Remove" value="Remove"/></div>');
+      });
+
+      $('body').on('click','.btnRemove',function() {
+        $(this).parent('div.con').remove()
+      });
+
+
 });
 function FormatNumber(obj) {
     var strvalue;
@@ -98,7 +108,7 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
     $('a#del_img').on('click', function(){
-        var url =  homeUrl() + "/admin/product/delimg/";
+        var url =  homeUrl() + "/backend/product/delimg/";
         var _token = $("form[name='frmEditProduct']").find("input[name='_token']").val();
         var idImg = $(this).parent().find("img").attr("idImg");
         var img = $(this).parent().find("img").attr("src");

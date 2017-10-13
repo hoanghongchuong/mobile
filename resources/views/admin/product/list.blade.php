@@ -18,7 +18,7 @@
       listid=listid.substr(1);   //alert(listid);
       if (listid=="") { alert("Bạn chưa chọn mục nào"); return false;}
       hoi= confirm("Bạn có chắc chắn muốn xóa?");
-      if (hoi==true) document.location = homeUrl()+"/admin/product/"+listid+"/deleteList";
+      if (hoi==true) document.location = homeUrl()+"/backend/product/"+listid+"/deleteList";
     });
   });
 </script>
@@ -28,7 +28,7 @@
     <small>@yield('action')</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="backend"><i class="fa fa-dashboard"></i> Home</a></li>
     <li><a href="javascript:">@yield('controller')</a></li>
     <li class="active">@yield('action')</li>
   </ol>
@@ -50,7 +50,7 @@
                 <th class="text-center with_dieuhuong">Stt</th>
                 <th>Danh mục</th>
                 <th>Tên sản phẩm</th>
-                <th>Thương hiệu</th>
+               
                 <th>Hình ảnh</th>
                 <th class="text-center with_dieuhuong">Hoạt động</th>
                 <th class="text-center with_dieuhuong">Sửa</th>
@@ -75,22 +75,14 @@
                   {{$item->name}}<br>
                   <!-- <a href="{{ asset('/'.$item->alias.'.html') }}" target="_blank">{{ $item->alias.'.html' }}</a> -->
                 </td>
-                <td> 
-                  <?php $thuonghieu = DB::table('thuonghieu')->where('id',$item->thuonghieu_id)->first(); ?>
-                  @if(!empty($thuonghieu))
-                    {{ $thuonghieu->name }}
-                  @else
-                    {{ 'None' }}
-                  @endif
-
-                </td>
+               
                 <td><img src="{{ asset('upload/product/'.$item->photo) }}" onerror="this.src='{{ asset('public/admin_assets/images/no-image.jpg') }}';" class="img_product"  alt="NO PHOTO" /></td>
                 <td class="text-center with_dieuhuong">
                   <div class="form-group"> 
                     @if($item->status>0)
-                      <a href="admin/product/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Hiển thị</a>
+                      <a href="backend/product/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Hiển thị</a>
                     @else
-                      <a href="admin/product/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Hiển thị</a>
+                      <a href="backend/product/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Hiển thị</a>
                     @endif
                   </div>
                   
@@ -103,14 +95,14 @@
                   </div> -->
                   <div class="form-group"> 
                     @if($item->noibat>0)
-                      <a href="admin/product/edit?id={{$item->id}}&noibat={{ time() }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Nổi bật</a>
+                      <a href="backend/product/edit?id={{$item->id}}&noibat={{ time() }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Nổi bật</a>
                     @else
-                      <a href="admin/product/edit?id={{$item->id}}&noibat={{ time() }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Nổi bật</a>
+                      <a href="backend/product/edit?id={{$item->id}}&noibat={{ time() }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Nổi bật</a>
                     @endif
                   </div>
                 </td>
                 <td class="text-center with_dieuhuong">
-                  <i class="fa fa-pencil fa-fw"></i><a href="admin/product/edit?id={{$item->id}}">Edit</a>
+                  <i class="fa fa-pencil fa-fw"></i><a href="backend/product/edit?id={{$item->id}}">Edit</a>
                 </td>
                 <td class="text-center">
                   <i class="fa fa-trash-o fa-fw"></i><a onClick="if(!confirm('Xác nhận xóa')) return false;" href="admin/product/{{$item->id}}/delete">Delete</a>
@@ -123,7 +115,7 @@
         <div class="box-footer col-md-12">
           <div class="row">
             <div class="col-md-6">
-              <input type="button" onclick="javascript:window.location='admin/product/add'" value="Thêm" class="btn btn-primary" />
+              <input type="button" onclick="javascript:window.location='backend/product/add'" value="Thêm" class="btn btn-primary" />
               <button type="button" id="xoahet" class="btn btn-success">Xóa</button>
               <input type="button" value="Thoát" onclick="javascript:window.location='admin'" class="btn btn-danger" />
 

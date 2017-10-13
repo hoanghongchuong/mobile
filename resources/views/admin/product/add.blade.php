@@ -74,16 +74,7 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>
-									<div class="form-group">
-								      	<label for="ten">Thương hiệu</label>
-								      	<select name="txtThuonghieu" class="form-control">
-
-								      		<option value="0">Chọn danh mục</option>
-								      		@foreach($thuonghieus as $thuonghieu)
-								      		<option value="{{$thuonghieu->id}}">{{$thuonghieu->name}}</option>
-								      		@endforeach
-								      	</select>
-									</div>
+									
 								</div>
 							</div>
 							<div class="col-md-6 col-xs-12">
@@ -100,6 +91,16 @@
 							      	<label for="ten">Mã SP</label>
 							      	<input type="text" name="txtCode"  value=""  class="form-control" />
 								</div>
+
+								<div class="form-group">
+									<label for="">Thuộc tính</label>
+									<div id="a">
+									  <!-- <input id="Text1" type="text" class="form-control" /> -->
+									</div>
+									<input id="btnAdd"  class="add-properties" type="button" value="Add" />
+
+								</div>
+
 								<div class="form-group">
 							      	<label for="desc">Mô tả</label>
 							      	<textarea name="txtDesc" rows="5" class="form-control"></textarea>
@@ -218,7 +219,7 @@
 			    	<div class="row">
 						<div class="col-md-6">
 					    	<button type="submit" class="btn btn-primary">Lưu</button>
-					    	<button type="button" onclick="javascript:window.location='admin/product'" class="btn btn-danger">Thoát</button>
+					    	<button type="button" onclick="javascript:window.location='backend/product'" class="btn btn-danger">Thoát</button>
 				    	</div>
 			    	</div>
 			  	</div>

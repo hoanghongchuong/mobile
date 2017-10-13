@@ -21,7 +21,7 @@
     	@include('admin.messages_error')
         <div class="box-body">
         	
-        	<form name="frmAdd" method="post" action="{!! asset('admin/bankaccount/edit/'.$data->id) !!}" enctype="multipart/form-data">
+        	<form name="frmAdd" method="post" action="{!! asset('backend/bankaccount/edit/'.$data->id) !!}" enctype="multipart/form-data">
         		<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 	      		
       			<div class="nav-tabs-custom">
