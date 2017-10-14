@@ -19,13 +19,18 @@ Route::get('lien-he',['as'=>'getContact', 'uses'=>'ContactController@getContact'
 Route::post('lien-he',['as'=>'postContact', 'uses'=>'ContactController@postContact']);
 
 Route::get('tin-tuc',['as'=>'getNews', 'uses'=>'IndexController@getNews']);
+Route::get('tin-tuc/{id}.html',['as'=>'getNewsDetail', 'uses'=>'IndexController@getNewsDetail']);
+Route::get('tuyen-dung',['as'=>'getNews', 'uses'=>'IndexController@getTuyenDung']);
+Route::get('tuyen-dung/{id}.html',['as'=>'getNewsDetail', 'uses'=>'IndexController@getNewsTuyenDungDetail']);
+
+
+
 Route::get('tim-kiem',['as'=>'search', 'uses'=>'IndexController@search']);
 Route::post('newsletter',['as'=>'postNewsletter', 'uses'=>'IndexController@postNewsletter']);
-Route::get('tin-tuc/{id}.html',['as'=>'getNewsDetail', 'uses'=>'IndexController@getNewsDetail']);
 Route::get('san-pham',['as'=>'getProduct', 'uses'=>'IndexController@getProduct']);
 Route::get('san-pham/{alias}.html','IndexController@getProductDetail')->name('detailProduct');
 Route::get('san-pham/{id}',['as'=>'getProductList', 'uses'=>'IndexController@getProductList']);
-
+Route::get('thanh-toan',['as'=>'thanhtoan', 'uses' => 'IndexController@thanhtoan']);
 // Route::get('san-pham/{cate}/{alias}',['as'=>'getProductChild', 'uses'=>'IndexController@getProductChild']);
 
 Route::get('thuong-hieu/{alias}','IndexController@getProductByThuongHieu');
@@ -58,7 +63,6 @@ Route::get('chi-tiet-dich-vu/{id}.html',['as'=>'getDichVuDetail', 'uses'=>'Index
 Route::get('tuyen-dung','IndexController@getTuyenDung')->name('getTuyenDung');
 Route::post('tuyen-dung',['as'=>'postTuyenDung', 'uses'=>'IndexController@postTuyenDung']);
 // Route::get('thu-vien-anh',['as'=>'getThuvienanh', 'uses'=>'IndexController@getThuvienanh']);
-
 // Route::get('hoi-vien',['as'=>'getHoivien', 'uses'=>'IndexController@getHoivien']);
 Route::get('{id}.html',['as'=>'getProductDetail', 'uses'=>'IndexController@getProductDetail']);
 Route::get('bai-viet/{id}.html',['as'=>'getBaiVietDetail', 'uses'=>'IndexController@getBaiVietDetail']);
@@ -70,7 +74,6 @@ Route::get('error/404.html',['as'=>'getErrorNotFount', 'uses'=>'IndexController@
 
 Route::get('backend/login',['as'=>'admin.auth.getLogin', 'uses'=>'AdminAuth\AuthController@getLogin']);
 Route::post('backend/postlogin',['as'=>'admin.auth.postLogin', 'uses'=>'AdminAuth\AuthController@postLogin']);
-
 
 Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 	Route::get('/',['as'=>'admin.index', 'uses'=>'Admin\IndexController@getIndex']);

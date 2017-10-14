@@ -9,12 +9,12 @@
             <nav class="vk-footer__nav">
 
                 <ul class="vk-menu__footer vk-list vk-list--inline-responsive">
-                    <li class="vk-list__item"><a href="index.html" title="Trang chủ">Trang chủ</a></li>
-                    <li class="vk-list__item"><a href="about.html" title="Giới thiệu">Giới thiệu</a></li>
-                    <li class="vk-list__item"><a href="product-list.html" title="Sản phẩm">Sản phẩm</a></li>
-                    <li class="vk-list__item"><a href="news-list.html" title="Tin tức">Tin tức</a></li>
+                    <li class="vk-list__item"><a href="{{url('')}}" title="Trang chủ">Trang chủ</a></li>
+                    <li class="vk-list__item"><a href="#" title="Giới thiệu">Giới thiệu</a></li>
+                    <li class="vk-list__item"><a href="{{url('san-pham')}}" title="Sản phẩm">Sản phẩm</a></li>
+                    <li class="vk-list__item"><a href="{{url('tin-tuc')}}" title="Tin tức">Tin tức</a></li>
                     <!-- <li class="vk-list__item"><a href="news-list.html" title="Tư vấn thiết kế">Tư vấn thiết kế</a></li> -->
-                    <li class="vk-list__item"><a href="contact.html" title="Liên hệ">Liên hệ</a></li>
+                    <li class="vk-list__item"><a href="{{url('lien-he')}}" title="Liên hệ">Liên hệ</a></li>
                 </ul> <!--./vk-menu__footer-->
 
             </nav> <!--./vk-footer__nav-->
@@ -69,9 +69,8 @@
 
                                 <div class="vk-address-item">
                                     <p><i class="vk-icon fa fa-home"></i> {{$setting->address}}</p>
-                                    <p><i class="vk-icon fa fa-phone"></i> Hotline<a href="callto:{{$setting->phone}}">{{$setting->phone}}</a>/p>
-                                    <p><i class="vk-icon fa fa-envelope-o"></i>Email<a
-                                            href="mailto:{{$setting->email}}">{{$setting->email}}</a>
+                                    <p><i class="vk-icon fa fa-phone"></i> Hotline: <a href="callto:{{$setting->phone}}"> {{$setting->phone}}</a></p>
+                                    <p><i class="vk-icon fa fa-envelope-o"></i>Email: <a href="mailto:{{$setting->email}}"> {{$setting->email}}</a>
                                     </p>
                                     <p><i class="vk-icon fa fa-globe"></i>Website:<a href="{{$setting->website}}">{{$setting->website}}</a> </p>
 

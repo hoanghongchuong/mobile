@@ -105,14 +105,15 @@
 							      	<label for="desc">Mô tả</label>
 							      	<textarea name="txtDesc" rows="5" class="form-control"></textarea>
 								</div>
+								<div class="form-group">
+							      	<label for="alias">Bảo hành</label>
+							      	<input type="text" name="txtBaohanh" id="txtBaohanh" value=""  class="form-control" />
+								</div>
 								<!-- <div class="form-group">
 							      	<label for="alias">Chất liệu</label>
 							      	<input type="text" name="txtThuonghieu" id="txtThuonghieu" value=""  class="form-control" />
 								</div>
-								<div class="form-group">
-							      	<label for="alias">Màu sắc</label>
-							      	<input type="text" name="txtBaohanh" id="txtBaohanh" value=""  class="form-control" />
-								</div>
+								
 								<div class="form-group">
 							      	<label for="alias">Size</label>
 							      	<input type="text" name="txtVanchuyen" id="txtVanchuyen" value=""  class="form-control" />

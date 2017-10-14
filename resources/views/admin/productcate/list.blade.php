@@ -83,10 +83,10 @@
                   @endif
                 </td>
                 <td class="text-center with_dieuhuong">
-                  <i class="fa fa-pencil fa-fw"></i><a href="admin/productcate/edit?id={{$item->id}}">Edit</a>
+                  <i class="fa fa-pencil fa-fw"></i><a href="backend/productcate/edit?id={{$item->id}}">Edit</a>
                 </td>
                 <td class="text-center">
-                  <i class="fa fa-trash-o fa-fw"></i><a onClick="if(!confirm('Xác nhận xóa')) return false;" href="admin/productcate/{{$item->id}}/delete">Delete</a>
+                  <i class="fa fa-trash-o fa-fw"></i><a onClick="if(!confirm('Xác nhận xóa')) return false;" href="backend/productcate/{{$item->id}}/delete">Delete</a>
                 </td>
               </tr>
               @endforeach

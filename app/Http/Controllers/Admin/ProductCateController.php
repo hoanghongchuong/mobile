@@ -40,7 +40,11 @@ class ProductCateController extends Controller {
         $cate->keyword = $request->txtKeyword;
         $cate->description = $request->description;
         $cate->stt = $request->stt;
-
+        if($request->noibat=='on'){
+            $product_cate->noibat = 1;
+        }else{
+            $product_cate->noibat = 0;
+        }
         if($request->status=='on'){
             $cate->status = 1;
         }else{
@@ -103,7 +107,11 @@ class ProductCateController extends Controller {
             $product_cate->keyword = $request->txtKeyword;
             $product_cate->description = $request->description;
             $product_cate->stt = $request->stt;
-
+            if($request->noibat=='on'){
+                $product_cate->noibat = 1;
+            }else{
+                $product_cate->noibat = 0;
+            }
             if($request->status=='on'){
                 $product_cate->status = 1;
             }else{
@@ -112,9 +120,9 @@ class ProductCateController extends Controller {
 
             $product_cate->save();
 
-            return redirect('admin/productcate/edit?id='.$id)->with('status','Cập nhật thành công');
+            return redirect('backend/productcate/edit?id='.$id)->with('status','Cập nhật thành công');
         }else{
-            return redirect('admin/productcate/')->with('status','Dữ liệu không có thực');
+            return redirect('backend/productcate/')->with('status','Dữ liệu không có thực');
         }
     }
     public function getDelete($id)

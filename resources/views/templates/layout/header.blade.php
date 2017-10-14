@@ -16,7 +16,7 @@
                 <ul class="vk-list vk-list-inline vk-menu__main">
                     <li><a href="{{url('')}}" title="">Trang chủ</a></li>
                     <li><a href="{{url('tin-tuc')}}" title="">Tin tức</a></li>
-                    <li><a href="#" title="">Tuyển dụng</a></li>
+                    <li><a href="{{url('tuyen-dung')}}" title="">Tuyển dụng</a></li>
                     <li><a href="#" title="">Giới thiệu</a></li>
                     <li><a href="#" title="">Trung tâm bảo hành</a></li>
                     <li><a href="{{url('lien-he')}}" title="">Liên hệ</a></li>
@@ -34,8 +34,10 @@
                     </a>
                 </div>
                 <div class="vk-form vk-form-search">
-                    <input type="text" class="form-control" placeholder="Từ khóa tìm kiếm">
-                    <button class="vk-btn vk-btn-submit"><i class="fa fa-search"></i></button>
+                    <form class="text-uppercase title search-frm" method="get" action="{{route('search')}}">
+                        <input type="text" class="form-control" required="required" name="txtSearch" placeholder="Từ khóa tìm kiếm">
+                        <button class="vk-btn vk-btn-submit"><i class="fa fa-search"></i></button>
+                    </form>
                 </div>
                 <div class="vk-header__hotline">
                     <div class="vk-hotline">
@@ -59,8 +61,8 @@
                         </ul>
                     @endif
                     <div class="vk-access vk-access--shopcart">
-                        <a href="shopcart.html" title="">Giỏ hàng <span class="vk-text--puce-1">(0 SP)</span></a>
-                        <a href="shopcart.html" title="">Click để xem giỏ hàng</a>
+                        <a href="{{url('gio-hang')}}" title="">Giỏ hàng <span class="vk-text--puce-1">({{Cart::count()}} SP)</span></a>
+                        <a href="{{url('gio-hang')}}" title="">Click để xem giỏ hàng</a>
                     </div>
                 </div>
             </div>
@@ -75,17 +77,6 @@
                 @foreach($cateProducts as $cateProduct)
                 <li><a href="{{url('san-pham/'.$cateProduct->alias)}}">{{$cateProduct->name}}</a></li>
                 @endforeach
-                <!-- <li><a href="product-list-level-2.html">Sky</a></li>
-                <li><a href="product-list-level-2.html">Samsung</a></li>
-                <li><a href="product-list-level-2.html">LG</a></li>
-                <li><a href="product-list-level-2.html">HTC</a></li>
-                <li><a href="product-list-level-2.html">Sony</a></li>
-                <li><a href="product-list-level-2.html">Điện thoại pin lâu</a></li>
-                <li><a href="product-list-level-2.html">Điện thoại người già</a></li>
-                <li><a href="product-list-level-2.html">QMobile</a></li>
-                <li><a href="product-list-level-2.html">Nokia</a></li>
-                <li><a href="product-list-level-2.html">BPhone</a></li>
-                <li><a href="product-list-level-2.html">Phụ kiện điện thoại</a></li> -->
             </ul>
         </nav>
         <nav class="vk-menu menu-mobile " id="menu">
@@ -94,22 +85,14 @@
                 <li>
                     <a href="{{url('san-pham')}}">Sản phẩm</a>
                     <ul class="child">
-                        <li><a href="product-list-level-2.html">Iphone</a></li>
-                        <li><a href="product-list-level-2.html">Sky</a></li>
-                        <li><a href="product-list-level-2.html">Samsung</a></li>
-                        <li><a href="product-list-level-2.html">LG</a></li>
-                        <li><a href="product-list-level-2.html">HTC</a></li>
-                        <li><a href="product-list-level-2.html">Sony</a></li>
-                        <li><a href="product-list-level-2.html">Điện thoại pin lâu</a></li>
-                        <li><a href="product-list-level-2.html">Điện thoại người già</a></li>
-                        <li><a href="product-list-level-2.html">QMobile</a></li>
-                        <li><a href="product-list-level-2.html">Nokia</a></li>
-                        <li><a href="product-list-level-2.html">BPhone</a></li>
-                        <li><a href="product-list-level-2.html">Phụ kiện điện thoại</a></li>
+                        <li class="home active"><a href="{{url('')}}"><i class="_icon fa fa-home"></i></a></li>
+                @foreach($cateProducts as $cateProduct)
+                <li><a href="{{url('san-pham/'.$cateProduct->alias)}}">{{$cateProduct->name}}</a></li>
+                @endforeach
                     </ul>
                 </li>
                 <li><a href="{{url('tin-tuc')}}" title="Tin tức">Tin tức</a></li>
-                <li><a href="news-list.html" title="">Tuyển dụng</a></li>
+                <li><a href="{{url('tuyen-dung')}}" title="">Tuyển dụng</a></li>
                 <li><a href="#" title="">Giới thiệu</a></li>
                 <li><a href="#" title="">Trung tâm bảo hành</a></li>
                 <li><a href="{{url('lien-he')}}" title="Liên hệ">Liên hệ</a></li>

@@ -11,8 +11,9 @@ $cateProducts = Cache::get('cateProducts');
 
             <div class="vk-ads-wide left">
                 <div class="vk-ads-wide__frame">
-                    <a href="#" title="">
-                        <img src="{{asset('public/images/ads/ads-1.jpg')}}" class="img-fluid" alt="">
+                    <?php $banner = DB::table('banner_content')->where('position', 3)->get() ?>
+                    <a href="{{$banner[0]->link}}" title="">
+                        <img src="{{asset('upload/banner/'.$banner[0    ]->image)}}" class="img-fluid" alt="">
                     </a>
 
                 </div>
@@ -20,21 +21,20 @@ $cateProducts = Cache::get('cateProducts');
 
             <div class="vk-ads-wide right">
                 <div class="vk-ads-wide__frame">
-                    <a href="#" title="">
-                        <img src="{{asset('public/images/ads/ads-2.jpg')}}" class="img-fluid" alt="">
+                    <a href="{{$banner[1]->link}}" title="">
+                        <img src="{{asset('upload/banner/'.$banner[1]->image)}}" class="img-fluid" alt="">
                     </a>
 
                 </div>
             </div>
 
             <div class="vk-home__slider vk-slider-dot-style-1" data-slider="home-slider">
-
+                <?php $sliders = DB::table('slider')->where('com','gioi-thieu')->get(); ?>
+                @foreach($sliders as $slider)
                 <div class="vk-img-frame">
-                    <img src="{{asset('public/images/slider/slider-2.jpg')}}" alt="">
+                    <img src="{{asset('upload/hinhanh/'.$slider->photo)}}" alt="">
                 </div>
-                <div class="vk-img-frame">
-                    <img src="{{asset('public/images/slider/slider-2.jpg')}}" alt="">
-                </div>
+                @endforeach
 
             </div> <!--./vk-home__slider-->
 

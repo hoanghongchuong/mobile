@@ -22,7 +22,7 @@ class NewsController extends Controller
         else if($_GET['type']=='ve-chung-toi') $trang='về chúng tôi';
         else if($_GET['type']=='chinh-sach') $trang='chính sách';
         else if($_GET['type']=='khong-gian') $trang='không gian';
-        else if($_GET['type']=='mau-thiet-ke') $trang='mẫu thiết kế';
+        else if($_GET['type']=='tuyen-dung') $trang='tuyển dụng';
         else $trang = "bài viết";
         $data = NewsCate::all();
         if(!empty($_GET['type'])){
@@ -41,7 +41,7 @@ class NewsController extends Controller
         else if($_GET['type']=='ve-chung-toi') $trang='về chúng tôi';
         else if($_GET['type']=='chinh-sach') $trang='chính sách';
         else if($_GET['type']=='khong-gian') $trang='không gian';
-        else if($_GET['type']=='mau-thiet-ke') $trang='mẫu thiết kế';
+        else if($_GET['type']=='tuyển dụng') $trang='tuyển dụng';
         else $trang = "bài viết";
 
         if(!empty($_GET['type'])){
@@ -112,7 +112,7 @@ class NewsController extends Controller
         }
         $news->user_id = Auth::user()->id;
         $news->save();
-        return redirect('admin/news?type='.$com)->with('status','Thêm mới thành công !');
+        return redirect('backend/news?type='.$com)->with('status','Thêm mới thành công !');
     }
     /**
      * Show the form for editing the specified resource.
@@ -147,7 +147,7 @@ class NewsController extends Controller
                     $data->status = 1; 
                 }
                 $data->update();
-                return redirect('admin/news?type='.$com)->with('status','Cập nhật thành công !');
+                return redirect('backend/news?type='.$com)->with('status','Cập nhật thành công !');
             }
             if($request->get('noibat')>0){
                 if($data->noibat == 1){
@@ -156,14 +156,14 @@ class NewsController extends Controller
                     $data->noibat = 1; 
                 }
                 $data->update();
-                return redirect('admin/news?type='.$com)->with('status','Cập nhật thành công !');
+                return redirect('backend/news?type='.$com)->with('status','Cập nhật thành công !');
             }
             if($request->get('delete_bg')>0){
                 $background='upload/news/'.$request->get('delete_bg');
                 File::delete($background);
                 $data->background='';
                 $data->update();
-                return redirect('admin/news?edit&id='.$id.'&type='.$com)->with('status','Xóa backgound thành công !');
+                return redirect('backend/news?edit&id='.$id.'&type='.$com)->with('status','Xóa backgound thành công !');
             }
             $parent = NewsCate::orderBy('stt', 'asc')->where('com' , $com)->get()->toArray();
             $news = News::select('stt')->orderBy('id','asc')->get()->toArray();
@@ -171,7 +171,7 @@ class NewsController extends Controller
         }else{
             $data = News::all();
             $parent = NewsCate::orderBy('stt', 'asc')->get()->toArray();
-            return redirect('admin/news?type='.$com)->with('status','Dữ liệu không có thực !');
+            return redirect('backend/news?type='.$com)->with('status','Dữ liệu không có thực !');
         }
         
     }
@@ -286,7 +286,7 @@ class NewsController extends Controller
         else if($_GET['type']=='ve-chung-toi') $trang='về chúng tôi';
         else if($_GET['type']=='chinh-sach') $trang='chính sách';
         else if($_GET['type']=='khong-gian') $trang='không gian';
-        else if($_GET['type']=='mau-thiet-ke') $trang='mẫu thiết kế';
+        else if($_GET['type']=='tuyen-dung') $trang='tuyển dụng';
         else $trang = "bài viết";
         
         if(!empty($_GET['type'])){
@@ -300,7 +300,7 @@ class NewsController extends Controller
             $news->delete();
             File::delete('upload/news/'.$news->photo);
         }
-        return redirect('admin/news?type='.$com)->with('status','Xóa thành công');
+        return redirect('backend/news?type='.$com)->with('status','Xóa thành công');
     }
     
 }

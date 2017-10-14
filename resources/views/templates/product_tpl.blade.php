@@ -1,63 +1,117 @@
 @extends('index')
 @section('content')
+<section class="vk-content">
+    <div class="vk-page product product-list">
+        <div class="vk-product">
+            <div class="container">
 
-<section class="banner">
-    <div class="container-flush">
-      <img src="{{asset('public/images/2_03.png')}}" alt="" title="" class="img" />
-    </div>
-    <div class="container">
-      <ul class="breadcumb">
-        <li><a href="{{url('')}}" title="">Trang chủ</a></li>
-        <li><a href="{{url('san-pham')}}" title="">Sản phẩm</a></li>
-      </ul>
-    </div>
-  </section>
+                <div class="vk-ads-wide left">
+                    <div class="vk-ads-wide__frame">
+                        <?php $banner = DB::table('banner_content')->where('position', 3)->get() ?>
+                        <a href="{{$banner[0]->link}}" title="">
+                            <img src="{{asset('upload/banner/'.$banner[0    ]->image)}}" class="img-fluid" alt="">
+                        </a>
 
-  <section class="filter">
-    <div class="container">
-      <div class="filter-b">
-        <div class="row no-row wrap">
-          @foreach($cate_pro as $item)
-          <div class="col-xs-12 col-sm-6 col-md-3 filter-wrap">
-            <div class="">
-              <a href="{{url('san-pham/'.$item->alias)}}" title="" class=""><img src="{{asset('upload/product/'.$item->photo)}}" alt="filter-item" title=""></a>
-              <h2 class="text-center filter-item-name">{{$item->name}}<a href="{{url('san-pham/'.$item->alias)}}" title=""></a></h2>
-            </div>
-          </div>
-          @endforeach
-        </div>
-        
-      </div>
-    </div>
-  </section>
+                    </div>
+                </div>
 
-  <section class="products">
-    <h2 class="text-uppercase text-center products-tit">SẢN PHẨM</h2>
-    <div class="container">
-      <div class="row wrap">
-        @foreach($product as $p)
-          <div class="col-xs-12 col-sm-4 product product">
-            <div class="products-item">
-              <a href="{{url('san-pham/'.$p->alias.'.html')}}" title=""><img src="{{asset('upload/product/'.$p->photo)}}" alt="" title=""></a>
-              <div class="products-item-over">
-                <p><i class="fa fa-search"></i></p>
-                <p><a href="{{url('san-pham/'.$p->alias.'.html')}}">Xem chi tiết</a></p>
-              </div>
-            </div>
-            <div>
-              <h3 class="text-center products-item-name"><a href="{{url('san-pham/'.$p->alias.'.html')}}" title="">{{$p->name}}</a></h3>
-              <h4 class="text-center products-price">{{number_format($p->price)}}<span> đ</span></h4>
-            </div>
-          </div>
-        @endforeach      
-       
-       </div>
-       <div class="row">
-         <div class="paginations">
-         {!! $product->links() !!}
-       </div>
-      </div>
-    </div>
-  </section>
+                <div class="vk-ads-wide right">
+                    <div class="vk-ads-wide__frame">
+                        <a href="{{$banner[1]->link}}" title="">
+                            <img src="{{asset('upload/banner/'.$banner[1]->image)}}" class="img-fluid" alt="">
+                        </a>
 
+                    </div>
+                </div>
+
+                <nav class="vk-breadcrumb">
+                    <ul class="vk-list vk-list-inline vk-list-breadcrumb">
+                        <li><a href="{{url('')}}">Trang chủ</a></li>
+
+                        <li class="active">Sản phẩm</li>
+                    </ul>
+                </nav>
+                <!--./vk-breadcrumb-->                
+                 <div class="vk-product-show">
+
+                        <div class="row">
+                            <div class="col-lg-2 vk-right-content order-2 order-lg-1">
+                                <div class="vk-inner-content">
+                                    <div class="vk-product__thumbail-cate pb-3 d-none d-lg-block">
+                                        <a href="product-list-level-2.html" title=""><img src="{{asset('public/images/shop/thumbnail-1.jpg')}}"
+                                                                                         alt="" class="img-fluid"></a>
+                                    </div>
+
+                                    <div class="vk-product__thumbail-cate pb-3 d-none d-lg-block">
+                                        <a href="product-list-level-2.html" title=""><img src="{{asset('public/images/shop/thumbnail-2.jpg')}}"
+                                                                                         alt="" class="img-fluid"></a>
+                                    </div>
+
+                                    <div class="vk-product-sale-off">
+                                        <h3 class="vk-heading style-2 inverse text-uppercase">Tin công nghệ</h3>
+                                        <div class="vk-product-list">
+                                            @foreach($tintucs as $tintuc)
+                                            <div class="vk-news-item-4">
+                                                <div class="vk-img-frame">
+                                                    <a href="{{url('tin-tuc/'.$tintuc->alias.'.html')}}" class="vk-img">
+                                                        <img src="{{asset('upload/news/'.$tintuc->photo)}}" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="vk-news-item-brief">
+                                                    <h3 class="vk-title"><a href="{{url('tin-tuc/'.$tintuc->alias.'.html')}}">{{$tintuc->name}}</a></h3>
+                                                    <div class="vk-published">{{date('d/m/Y', strtotime($tintuc->created_at))}}</div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+
+                                        </div> <!--./vk-product-list-->
+                                    </div> <!--./vk-product-sale-off-->
+                                </div> <!--./vk-inner-content-->
+
+                            </div> <!--./vk-right-content-->
+
+                            <div class="col-lg-10 order-1 order-lg-2">
+                                <div class="vk-product-list-box">
+                                    <div class="vk-product-list vk-product-list--mod-1  row no-gutters">
+                                      @foreach($product as $item)
+                                        <div class="col-sm-2 col-md-4 vk-col-lg item">
+                                            <div class="vk-shop-item">
+                                                <div class="vk-img-frame">
+                                                    <a class="vk-img" href="{{url('san-pham/'.$item->alias.'.html')}}">
+                                                        <img src="{{asset('upload/product/'.$item->photo)}}" alt="">
+                                                    </a>
+                                                </div>
+
+                                                <div class="vk-shop-item-brief">
+                                                    <h3 class="vk-title"><a href="{{url('san-pham/'.$item->alias.'.html')}}">{{$item->name}}</a></h3>
+                                                    <p class="vk-price">Giá: {{number_format($item->price)}} VNĐ</p>
+                                                </div>
+                                            </div> <!--./vk-shop-item-->
+                                        </div> <!--./item-->
+                                      @endforeach
+                                    </div> <!--./vk-product-list-->
+                                </div> <!--./vk-product-list-box-->
+
+
+                                <!-- <nav class="vk-pagination">
+                                    <ul class="vk-list vk-list-inline vk-list-pagination">
+
+                                        <li class="active"><a href="#">1</a></li>
+
+                                        <li class=""><a href="#">2</a></li>
+
+                                        <li class=""><a href="#">3</a></li>
+
+                                        <li class=""><a href="#">4</a></li>
+
+                                    </ul>
+                                </nav> -->
+                            </div>
+                        </div>
+
+                    </div> 
+            </div> <!-- /.container -->
+        </div> <!--./vk-product-->
+    </div><!--./vk-page-->
+</section>
 @endsection

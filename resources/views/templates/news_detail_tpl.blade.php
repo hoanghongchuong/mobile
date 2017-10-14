@@ -5,21 +5,19 @@
     <div class="vk-page news news-detail">
         <div class="vk-news-detail">
             <div class="container">
-
-
                 <div class="vk-ads-wide left">
                     <div class="vk-ads-wide__frame">
-                        <a href="#" title="">
-                            <img src="{{asset('public/images/ads/ads-1.jpg')}}" class="img-fluid" alt="">
+                        <?php $banner = DB::table('banner_content')->where('position', 3)->get() ?>
+                        <a href="{{$banner[0]->link}}" title="">
+                            <img src="{{asset('upload/banner/'.$banner[0    ]->image)}}" class="img-fluid" alt="">
                         </a>
 
                     </div>
                 </div>
-
                 <div class="vk-ads-wide right">
                     <div class="vk-ads-wide__frame">
-                        <a href="#" title="">
-                            <img src="{{asset('public/images/ads/ads-2.jpg')}}" class="img-fluid" alt="">
+                        <a href="{{$banner[1]->link}}" title="">
+                            <img src="{{asset('upload/banner/'.$banner[1]->image)}}" class="img-fluid" alt="">
                         </a>
 
                     </div>
@@ -77,7 +75,8 @@
 
                             <div class="vk-ads pt-2">
                                 <div class="vk-img-frame">
-                                    <img src="{{asset('public/images/ads/2.jpg')}}" alt="">
+                                    <?php $qc = DB::table('banner_content')->where('position',4)->first(); ?>
+                                    <img src="{{asset('upload/banner/'.$qc->image)}}" alt="">
                                 </div>
                             </div> <!--./vk-ads-->
 

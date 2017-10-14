@@ -6,16 +6,20 @@
             <div class="container">
                 <div class="vk-ads-wide left">
                     <div class="vk-ads-wide__frame">
-                        <a href="#" title="">
-                            <img src="{{asset('pubic/images/ads/ads-1.jpg')}}" class="img-fluid" alt="">
+                        <?php $banner = DB::table('banner_content')->where('position', 3)->get() ?>
+                        <a href="{{$banner[0]->link}}" title="">
+                            <img src="{{asset('upload/banner/'.$banner[0    ]->image)}}" class="img-fluid" alt="">
                         </a>
+
                     </div>
                 </div>
+
                 <div class="vk-ads-wide right">
                     <div class="vk-ads-wide__frame">
-                        <a href="#" title="">
-                            <img src="{{asset('pubic/images/ads/ads-2.jpg')}}" class="img-fluid" alt="">
+                        <a href="{{$banner[1]->link}}" title="">
+                            <img src="{{asset('upload/banner/'.$banner[1]->image)}}" class="img-fluid" alt="">
                         </a>
+
                     </div>
                 </div>
                 <nav class="vk-breadcrumb">

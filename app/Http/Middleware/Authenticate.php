@@ -41,10 +41,9 @@ class Authenticate {
 			}
 			else
 			{
-				return redirect()->guest('admin/login');
+				return redirect()->guest('backend/login');
 			}
 		}
-
 		return $next($request);
 	}
 

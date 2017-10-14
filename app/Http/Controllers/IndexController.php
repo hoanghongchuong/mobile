@@ -80,7 +80,8 @@ class IndexController extends Controller {
 	public function getProduct()
 	{
 		$cate_pro = DB::table('product_categories')->where('status',1)->orderby('id','asc')->get();
-		$product = DB::table('products')->select()->where('status',1)->orderby('stt','desc')->paginate(9);
+		$product = DB::table('products')->select()->where('status',1)->orderby('stt','desc')->paginate(20);
+		$tintucs = DB::table('news')->where('com','tin-tuc')->orderBy('id','desc')->take(3)->get();
 		// dd($product_cate);
 		// $banner_danhmuc = DB::table('lienket')->select()->where('status',1)->where('com','chuyen-muc')->where('link','san-pham')->get()->first();
 		// $camnhan_khachhang = DB::table('lienket')->select()->where('status',1)->where('com','cam-nhan')->orderby('stt','asc')->get();
@@ -94,7 +95,7 @@ class IndexController extends Controller {
 		// $img_share = asset('upload/hinhanh/'.$banner_danhmuc->photo);
 		
 		// return view('templates.product_tpl', compact('product','banner_danhmuc','doitac','camnhan_khachhang','keyword','description','title','img_share'));
-			return view('templates.product_tpl', compact('title','keyword','description','product', 'com','cate_pro'));
+			return view('templates.product_tpl', compact('title','keyword','description','product', 'com','cate_pro','tintucs'));
 	}
 
 	public function getProductList($id)
@@ -186,7 +187,6 @@ class IndexController extends Controller {
 	{
 		$search = $request->txtSearch;
 		$cate_pro = DB::table('product_categories')->where('status',1)->orderby('id','asc')->get();
-		$thuonghieus = DB::table('thuonghieu')->get();
 		// Cấu hình SEO
 		$title = "Tìm kiếm: ".$search;
 		$keyword = "Tìm kiếm: ".$search;
@@ -196,7 +196,7 @@ class IndexController extends Controller {
 		
 		$product = DB::table('products')->select()->where('name', 'LIKE', '%' . $search . '%')->orderBy('id','DESC')->get();
 		// dd($product);
-		return view('templates.search_tpl', compact('product','banner_danhmuc','keyword','description','title','img_share','search','cate_pro','thuonghieus'));
+		return view('templates.search_tpl', compact('product','banner_danhmuc','keyword','description','title','img_share','search','cate_pro'));
 	}
 
 	public function getNews()
@@ -384,6 +384,33 @@ class IndexController extends Controller {
 		}
 		
 	}
+	public function getNewsTuyenDungDetail($id){
+		$news_detail = DB::table('news')->select()->where('status',1)->where('com','tuyen-dung')->where('alias',$id)->get()->first();
+		if(!empty($news_detail)){
+			$camnhan_khachhang = DB::table('lienket')->select()->where('status',1)->where('com','cam-nhan')->get();
+			$banner_danhmuc = DB::table('lienket')->select()->where('status',1)->where('com','chuyen-muc')->where('link','bai-viet')->get()->first();
+			$quangcao_tintuc = DB::table('lienket')->select()->where('status',1)->where('com','chuyen-muc')->where('link','quang-cao')->get();
+			$tintuc_moinhat_detail = DB::table('news')->select()->where('status',1)->where('com','tin-tuc')->orderby('created_at','desc')->take(6)->get();
+			$tinkhac = DB::table('news')->where('status',1)->where('id','<>',$id)->take(7)->get();
+			$hot_news = DB::table('news')->where('status',1)->where('noibat',1)->orderBy('created_at','desc')->take(5)->get();
+			$baiviet_khac = DB::table('news')->select()->where('status',1)->where('cate_id','=',$news_detail->cate_id)->where('com','tin-tuc')->orderby('created_at','desc')->get();
+			$com='tin-tuc';
+			$setting = Cache::get('setting');
+			// Cấu hình SEO
+			if(!empty($news_detail->title)){
+				$title = $news_detail->title;
+			}else{
+				$title = $news_detail->name;
+			}
+			$keyword = $news_detail->keyword;
+			$description = $news_detail->description;
+			$img_share = asset('upload/news/'.$news_detail->photo);
+
+			return view('templates.news_detail_tpl', compact('news_detail','com','tintuc_moinhat_detail','camnhan_khachhang','banner_danhmuc','baiviet_khac','quangcao_tintuc','keyword','description','title','img_share','hot_news','tinkhac'));
+		}else{
+			return redirect()->route('getErrorNotFount');
+		}
+	}
 	public function getMauThietKeDetail($id)
 	{
 		$news_detail = DB::table('news')->select()->where('status',1)->where('com','mau-thiet-ke')->where('alias',$id)->get()->first();
@@ -460,7 +487,9 @@ class IndexController extends Controller {
 
 	public function getTuyenDung(){
 		$com='tuyen-dung';
-		return view('templates.tuyendung_tpl', compact('com'));
+		$tintuc = DB::table('news')->select()->where('status',1)->where('com','tuyen-dung')->orderby('id','desc')->paginate(6);
+		$tintuc_noibat = DB::table('news')->select()->where('status',1)->where('noibat','>',0)->where('com','tin-tuc')->take(12)->get();
+		return view('templates.tuyendung_tpl', compact('com','tintuc','tintuc_noibat'));
 	}
 	public function postTuyenDung(Request $request){
 		$data = new Recruitment;
@@ -574,7 +603,7 @@ class IndexController extends Controller {
     	$bill->note = $req->note;
     	$bill->address = $req->address;
     	$bill->payment = (int)($req->payment_method);
-    	// $bill->province = $req->province;
+    	$bill->province = $req->province;
     	// $bill->district = $req->district;
     	$total = $this->getTotalPrice();
     	$bill->total = $total;
@@ -614,6 +643,10 @@ class IndexController extends Controller {
     	return redirect()->back()->with('mess','Đã xóa giỏ hàng');
     }
 
+    public function thanhtoan(){
+    	$bank = DB::table('bank_account')->get();
+		return view('templates.thanhtoan_tpl',compact('bank'));
+	}
     public function loadDistrictByProvince($id){
     	$district = District::where('province_id',$id)->get();
     	// dd($district);

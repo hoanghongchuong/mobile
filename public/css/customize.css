@@ -65,3 +65,11 @@
     max-width: 100%;
     height: auto;
 }
+@media (min-width: 1200px) {
+    .vk-button{
+        float: right;
+    }
+    .vk-button .vk-btn{
+        margin-left: 10px;
+    }
+}
