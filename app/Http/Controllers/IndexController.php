@@ -102,7 +102,7 @@ class IndexController extends Controller {
 	{
 		//Tìm article thông qua mã id tương ứng
 		$cate_pro = DB::table('product_categories')->where('status',1)->orderby('id','asc')->get();
-
+		$com='d';
 		$product_cate = DB::table('product_categories')->select()->where('status',1)->where('alias',$id)->get()->first();
 		if(!empty($product_cate)){
 			$product = DB::table('products')->select()->where('status',1)->where('cate_id',$product_cate->id)->orderBy('stt','asc')->paginate(20);
@@ -120,7 +120,7 @@ class IndexController extends Controller {
 			$keyword = $product_cate->keyword;
 			$description = $product_cate->description;
 			$img_share = asset('upload/product/'.$product_cate->photo);
-			return view('templates.productlist_tpl', compact('product','product_cate','banner_danhmuc','doitac','keyword','description','title','img_share','cate_pro','tintucs','cateChilds'));
+			return view('templates.productlist_tpl', compact('product','product_cate','banner_danhmuc','doitac','keyword','description','title','img_share','cate_pro','tintucs','cateChilds','com'));
 		}else{
 			return redirect()->route('getErrorNotFount');
 		}

@@ -8,7 +8,7 @@
                     <div class="vk-ads-wide__frame">
                         <?php $banner = DB::table('banner_content')->where('position', 3)->get() ?>
                         <a href="{{$banner[0]->link}}" title="">
-                            <img src="{{asset('upload/banner/'.$banner[0    ]->image)}}" class="img-fluid" alt="">
+                            <img src="{{asset('upload/banner/'.$banner[0]->image)}}" class="img-fluid" alt="">
                         </a>
 
                     </div>

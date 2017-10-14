@@ -66,7 +66,7 @@
     height: auto;
 }
 @media (min-width: 1200px) {
-    .vk-button{
+    .f-right{
         float: right;
     }
     .vk-button .vk-btn{

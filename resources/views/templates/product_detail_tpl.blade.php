@@ -42,39 +42,21 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="vk-image-product-main vk-slider slider-for">
+                                    @foreach($album_hinh as $album)
                                     <div class="vk-img-frame">
-                                        <img src="{{asset('public/images/shop/shop-thumbnail-1.jpg')}}" alt="">
+                                        <img src="{{asset('upload/hasp/'.$album->photo)}}" alt="">
                                     </div>
-                                    <div class="vk-img-frame">
-                                        <img src="{{asset('public/images/shop/shop-thumbnail-1.jpg')}}" alt="">
-                                    </div>
-                                    <div class="vk-img-frame">
-                                        <img src="{{asset('public/images/shop/shop-thumbnail-1.jpg')}}" alt="">
-                                    </div>
-                                    <div class="vk-img-frame">
-                                        <img src="{{asset('public/images/shop/shop-thumbnail-1.jpg')}}" alt="">
-                                    </div>
-                                    <div class="vk-img-frame">
-                                        <img src="{{asset('public/images/shop/shop-thumbnail-1.jpg')}}" alt="">
-                                    </div>
+                                    @endforeach
+                                             
                                 </div>
 
                                 <div class="vk-image-product-thumbnails vk-slider slider-nav vk-slider-arrow-style-2">
+                                    @foreach($album_hinh as $album)
                                     <div class="vk-img-frame">
-                                        <img src="{{asset('public/images/shop/shop-thumbnail-sub-1.jpg')}}" alt="">
+                                        <img src="{{asset('upload/hasp/'.$album->photo)}}" alt="">
                                     </div>
-                                    <div class="vk-img-frame">
-                                        <img src="{{asset('public/images/shop/shop-thumbnail-sub-1.jpg')}}" alt="">
-                                    </div>
-                                    <div class="vk-img-frame">
-                                        <img src="{{asset('public/images/shop/shop-thumbnail-sub-1.jpg')}}" alt="">
-                                    </div>
-                                    <div class="vk-img-frame">
-                                        <img src="{{asset('public/images/shop/shop-thumbnail-sub-1.jpg')}}" alt="">
-                                    </div>
-                                    <div class="vk-img-frame">
-                                        <img src="{{asset('public/images/shop/shop-thumbnail-sub-1.jpg')}}" alt="">
-                                    </div>
+                                    @endforeach
+                                    
                                 </div>
 
                             </div> <!--./col-4-->

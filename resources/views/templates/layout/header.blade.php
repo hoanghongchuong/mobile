@@ -33,12 +33,14 @@
                         <img src="{{asset('upload/hinhanh/'.$setting->photo)}}" alt="">
                     </a>
                 </div>
-                <div class="vk-form vk-form-search">
-                    <form class="text-uppercase title search-frm" method="get" action="{{route('search')}}">
-                        <input type="text" class="form-control" required="required" name="txtSearch" placeholder="Từ khóa tìm kiếm">
-                        <button class="vk-btn vk-btn-submit"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
+                <form class="text-uppercase title search-frm" method="get" action="{{route('search')}}">
+                    <div class="vk-form vk-form-search">
+                       
+                            <input type="text" class="form-control" required="required" name="txtSearch" placeholder="Từ khóa tìm kiếm">
+                            <button class="vk-btn vk-btn-submit"><i class="fa fa-search"></i></button>
+                       
+                    </div>
+                 </form>
                 <div class="vk-header__hotline">
                     <div class="vk-hotline">
                         <i class="vk-hotline__icon fa fa-phone"></i>
@@ -73,9 +75,9 @@
     <div class="container">
         <nav class="vk-menu vk-main-menu">
             <ul class="vk-list vk-list-inline vk-list-menu">
-                <li class="home active"><a href="{{url('')}}"><i class="_icon fa fa-home"></i></a></li>
+                <li class="home @if(!empty($com) && $com=='index') active @endif"><a href="{{url('')}}"><i class="_icon fa fa-home"></i></a></li>
                 @foreach($cateProducts as $cateProduct)
-                <li><a href="{{url('san-pham/'.$cateProduct->alias)}}">{{$cateProduct->name}}</a></li>
+                <li class="@if(isset($product_cate) && $product_cate->id == $cateProduct->id) active @endif"><a href="{{url('san-pham/'.$cateProduct->alias)}}">{{$cateProduct->name}}</a></li>
                 @endforeach
             </ul>
         </nav>
@@ -85,10 +87,10 @@
                 <li>
                     <a href="{{url('san-pham')}}">Sản phẩm</a>
                     <ul class="child">
-                        <li class="home active"><a href="{{url('')}}"><i class="_icon fa fa-home"></i></a></li>
-                @foreach($cateProducts as $cateProduct)
-                <li><a href="{{url('san-pham/'.$cateProduct->alias)}}">{{$cateProduct->name}}</a></li>
-                @endforeach
+                        <li class="home @if(!empty($com) && $com=='index') active @endif "><a href="{{url('')}}"><i class="_icon fa fa-home"></i></a></li>
+                        @foreach($cateProducts as $cateProduct)
+                        <li class="@if(isset($product_cate) && $product_cate->id == $cateProduct->id) active @endif "><a href="{{url('san-pham/'.$cateProduct->alias)}}">{{$cateProduct->name}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li><a href="{{url('tin-tuc')}}" title="Tin tức">Tin tức</a></li>

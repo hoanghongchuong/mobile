@@ -88,7 +88,7 @@
                         <p>Tổng thanh toán: <span class="vk-shopcart-price">{{number_format($total)}} VNĐ</span></p>
                     </div>
 
-                    <div class="vk-button">
+                    <div class="vk-button f-right">
                         <button type="submit" class="vk-btn">Cập nhật</button>
                         <a href="{{url('thanh-toan')}}" class=" vk-btn vk-btn-checkout text-uppercase">Thanh toán</a>
                         <a href="{{url('san-pham')}}" class=" vk-btn vk-btn-continue text-uppercase inverse-1">Tiếp tục mua sản phẩm</a>
