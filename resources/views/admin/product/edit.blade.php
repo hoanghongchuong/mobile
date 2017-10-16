@@ -70,7 +70,11 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>
-									
+									<div class="form-group">
+								      	<label for="alias">Ghi chú</label>
+								      	<!-- <input type="text" name="txtHuongdan" id="txtContent" value="{{ $data->huongdan }}"  class="form-control" /> -->
+								      	<textarea name="txtHuongdan" rows="5" id="txtContent" class="form-control">{{ $data->huongdan }}</textarea>
+									</div>
 									
 								</div>
 								<div class="col-md-6 col-xs-12">
@@ -81,6 +85,10 @@
 									<div class="form-group">
 								      	<label for="ten">Mã SP</label>
 								      	<input type="text" name="txtCode"  value="{{ $data->code }}"  class="form-control" />
+									</div>
+									<div class="form-group">
+								      	<label for="alias">Bảo hành</label>
+								      	<input type="text" name="txtBaohanh" id="txtBaohanh" value="{{ $data->baohanh }}"  class="form-control" />
 									</div>
 									<div class="form-group">
 										<label for="">Thuộc tính</label>
@@ -104,10 +112,10 @@
 								      	<label for="ten">Giá cũ</label>
 								      	<input type="text" name="txtPriceOld" onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value="{{ number_format($data->price_old,0,'',',') }}"  class="form-control" />
 									</div> -->
-									<div class="form-group">
+									<!-- <div class="form-group">
 								      	<label for="desc">Mô tả</label>
 								      	<textarea name="txtDesc" rows="5" id="txtContent" class="form-control">{{ $data->mota }}</textarea>
-									</div>
+									</div> -->
 									<!-- <div class="form-group">
 								      	<label for="alias">Chất liệu</label>
 								      	<input type="text" name="txtThuonghieu" id="txtThuonghieu" value="{{ $data->thuonghieu }}"  class="form-control" />
@@ -120,18 +128,16 @@
 								      	<label for="alias">Size</label>
 								      	<input type="text" name="txtVanchuyen" id="txtVanchuyen" value="{{ $data->vanchuyen }}"  class="form-control" />
 									</div> -->
+									
 									<!-- <div class="form-group">
-								      	<label for="alias">Hướng dẫn sử dụng</label>
-								      	<input type="text" name="txtHuongdan" id="txtHuongdan" value="{{ $data->huongdan }}"  class="form-control" />
-									</div>
-									<div class="form-group">
 								      	<label for="alias">Năm sản xuất</label>
 								      	<input type="text" name="txtNamsanxuat" id="txtNamsanxuat" value="{{ $data->namsanxuat }}"  class="form-control" />
 									</div> -->
-									<!-- <div class="form-group">
-								      	<label for="alias">Phụ kiện</label>
-								      	<input type="text" name="txtQuatang" id="txtQuatang" value="{{ $data->quatang }}"  class="form-control" />
-									</div> -->
+									<div class="form-group">
+								      	<label for="alias">Khuyến mại</label>
+								      	<!-- <input type="text" name="txtQuatang" id="txtQuatang" value="{{ $data->quatang }}"  class="form-control" /> -->
+								      	<textarea name="txtQuatang" rows="5" id="txtContent" class="form-control">{{ $data->quatang }}</textarea>
+									</div>
 									<!-- <div class="form-group">
 								      	<label for="alias">Model</label>
 								      	<input type="text" name="txtModel" id="txtModel" value="{{ $data->model }}"  class="form-control" />
@@ -235,11 +241,11 @@
 				        	<input type="checkbox" name="noibat" {!! (!isset($data->noibat) || $data->noibat==1)?'checked="checked"':'' !!}> Nổi bật
 				    	</label>
 				    </div>
-				    <!-- <div class="form-group">
+				    <div class="form-group">
 					    <label>
-				        	<input type="checkbox" name="spbc" {!! (!isset($data->spbc) || $data->spbc==1)?'checked="checked"':'' !!}> Bán chạy
+				        	<input type="checkbox" name="spbc" {!! (!isset($data->spbc) || $data->spbc==1)?'checked="checked"':'' !!}> Sale off
 				    	</label>
-				    </div> -->
+				    </div>
 			    </div>
 			    <div class="clearfix"></div>
 			    <div class="box-footer">

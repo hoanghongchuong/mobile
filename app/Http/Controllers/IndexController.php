@@ -66,6 +66,8 @@ class IndexController extends Controller {
 		$news_product = DB::table('products')->select()->where('status',1)->orderBy('id','desc')->limit(8)->get();
 		$hot_product  = DB::table('products')->where('status',1)->where('noibat',1)->orderBy('created_at','desc')->limit(8)->get();
 		$about = DB::table('about')->first();
+		$cateHots = DB::table('product_categories')->where('noibat',1)->get();
+		$video = DB::table('video')->first();
 		// Cấu hình SEO
 		$setting = Cache::get('setting');
 		$slider = DB::table('slider')->get();
@@ -75,7 +77,7 @@ class IndexController extends Controller {
 		// End cấu hình SEO
 		$img_share = asset('upload/hinhanh/'.$setting->photo);
 
-		return view('templates.index_tpl', compact('banner_danhmuc','com','khonggian_list','about','tintuc_moinhat','keyword','description','title','img_share','hot_news','news_product','hot_product','slider','banner_sidebar'));
+		return view('templates.index_tpl', compact('banner_danhmuc','com','khonggian_list','about','tintuc_moinhat','keyword','description','title','img_share','hot_news','news_product','hot_product','slider','banner_sidebar','cateHots','video'));
 	}
 	public function getProduct()
 	{
@@ -120,6 +122,7 @@ class IndexController extends Controller {
 			$keyword = $product_cate->keyword;
 			$description = $product_cate->description;
 			$img_share = asset('upload/product/'.$product_cate->photo);
+			
 			return view('templates.productlist_tpl', compact('product','product_cate','banner_danhmuc','doitac','keyword','description','title','img_share','cate_pro','tintucs','cateChilds','com'));
 		}else{
 			return redirect()->route('getErrorNotFount');
@@ -127,10 +130,10 @@ class IndexController extends Controller {
 	}
 
 	public function getProductChild($alias){
-		$products = DB::table('products')->where('alias',$alias)->get();
-		dd($alias);
+		$cate = DB::table('product_categories')->where('alias',$alias)->first();
+		$products = DB::table('products')->select()->where('status',1)->where('cate_id',$cate->id)->orderBy('id','desc')->paginate(20);
 		$tintucs = DB::table('news')->orderBy('id','desc')->take(3)->get();
-		return view('templates.productlist_level2', compact('tintucs'));
+		return view('templates.productlist_level2', compact('tintucs','products'));
 	}
 
 	

@@ -105,7 +105,30 @@
                             </div> <!--./vk-inner-content-->
                         </div> <!--./vk-right-content-->
                         <div class="col-lg-10 order-1 order-lg-2">
-                           
+                           <div class="vk-product-list-box">
+                                    <div class="vk-product-list vk-product-list--mod-1  row no-gutters">
+                                        @foreach($products as $product)
+                                        <div class="col-sm-2 col-md-4 vk-col-lg item">
+                                            <div class="vk-shop-item">
+                                                <div class="vk-img-frame">
+                                                    <a class="vk-img" href="{{url('san-pham/'.$product->alias.'.html')}}">
+                                                        <img src="{{asset('upload/product/'.$product->photo)}}" alt="">
+                                                    </a>
+                                                </div>
+
+                                                <div class="vk-shop-item-brief">
+                                                    <h3 class="vk-title"><a href="{{url('san-pham/'.$product->alias.'.html')}}">{{$product->name}}</a></h3>
+                                                    <p class="vk-price">Giá: {{number_format($product->price)}} VNĐ</p>
+                                                </div>
+                                            </div> <!--./vk-shop-item-->
+                                        </div> <!--./item-->
+                                        @endforeach
+
+                                    </div> <!--./vk-product-list-->
+                                </div> <!--./vk-product-list-box-->
+
+
+                                <div class="paginations">{!! $products->links() !!}</div>
                                 
                         </div>
                     </div>

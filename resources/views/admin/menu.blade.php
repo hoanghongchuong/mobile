@@ -89,20 +89,21 @@
             <li><a href="backend/about/edit?type=dich-vu"><i class="fa fa-circle-o"></i> <span>Giới thiệu dịch vụ</span></a></li>
           </ul>
         </li> -->
-        <!-- <li class="treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i> <span>Quản lý tin tức</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            
-            <li><a href="backend/newscate?type=tin-tuc"><i class="fa fa-circle-o"></i> <span>Danh mục</span></a></li>
-            <li><a href="backend/news?type=tin-tuc"><i class="fa fa-circle-o"></i> <span>Tin tức</span></a></li>
+             <li><a href="backend/news?type=tin-tuc"><i class="fa fa-circle-o"></i> <span>Tin tức công nghệ</span></a></li>
+              <li><a href="backend/news?type=tuyen-dung"><i class="fa fa-circle-o"></i> <span>Tin tức tuyển dụng</span></a></li>
+            <!-- <li><a href="backend/newscate?type=tin-tuc"><i class="fa fa-circle-o"></i> <span>Danh mục</span></a></li>
+            <li><a href="backend/news?type=tin-tuc"><i class="fa fa-circle-o"></i> <span>Tin tức</span></a></li> -->
           </ul>
-        </li> -->
-        <li><a href="backend/news?type=tin-tuc"><i class="fa fa-circle-o"></i> <span>Tin tức công nghệ</span></a></li>
-        <li><a href="backend/news?type=tuyen-dung"><i class="fa fa-circle-o"></i> <span>Tin tức tuyển dụng</span></a></li>
+        </li>
+       
         <li><a href="backend/about/edit?type=gioi-thieu"><i class="fa fa-circle-o"></i> <span>Giới thiệu</span></a></li>
+        <li><a href="backend/video"><i class="fa fa-circle-o"></i> <span>Video</span></a></li>
        
         <!-- <li class="treeview">
           <a href="#">

@@ -97,8 +97,9 @@ class ProductController extends Controller
             $product->tinhtrang = 0;
         }
         $product->user_id = Auth::user()->id;
-        $product->properties = implode('###',$request->properties);
-
+        if(!empty($request->properties)){
+            $product->properties = implode('###',$request->properties);
+        }
         //     if(isset($_POST['number'])){
         //     $number = $_POST['number'];
         //     $product->number_id = implode(',', $number);

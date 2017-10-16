@@ -40,332 +40,97 @@ $cateProducts = Cache::get('cateProducts');
 
             <div class="vk-home__cate">
                 <div class="row">
-
+                    <?php $cateHomes = DB::table('product_categories')->where('status',1)->orderBy('id','asc')->take(3)->get() ?>
+                    @foreach($cateHomes as $cateHome)
                     <div class="col-lg-4">
                         <div class="vk-home-cate__item">
                             <div class="vk-img-frame">
-                                <a href="product-list-level-2.html" title="">
-                                    <img src="{{asset('public/images/home/home-cate-1.jpg')}}" alt="">
+                                <a href="{{url('san-pham/'.$cateHome->alias)}}" title="">
+                                    <img src="{{asset('upload/product/'.$cateHome->photo)}}" alt="">
                                 </a>
                             </div>
                             <div class="vk-home-cate__brief">
                                 <div class="vk-home-cate__wrapper">
-                                    <h3 class="vk-home-cate__title"><a href="product-list-level-2.html" title="">apple</a> </h3>
-                                    <a class="vk-home-cate__more" href="product-list-level-2.html" title="">xem thêm >> </a>
+                                    <h3 class="vk-home-cate__title"><a href="{{url('san-pham/'.$cateHome->alias)}}" title="">{{$cateHome->name}}</a> </h3>
+                                    <a class="vk-home-cate__more" href="{{url('san-pham/'.$cateHome->alias)}}" title="">xem thêm >> </a>
                                 </div>
 
                             </div>
                         </div> <!--./vk-home-cate__item-->
                     </div> <!--./col-->
-                    <div class="col-lg-4">
-                        <div class="vk-home-cate__item">
-                            <div class="vk-img-frame">
-                                <a href="product-list-level-2.html" title="">
-                                    <img src="{{asset('public/images/home/home-cate-2.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="vk-home-cate__brief">
-                                <div class="vk-home-cate__wrapper">
-                                    <h3 class="vk-home-cate__title"><a href="product-list-level-2.html" title="">nokia</a> </h3>
-                                    <a class="vk-home-cate__more" href="product-list-level-2.html" title="">xem thêm >> </a>
-                                </div>
-
-                            </div>
-                        </div> <!--./vk-home-cate__item-->
-                    </div> <!--./col-->
-                    <div class="col-lg-4">
-                        <div class="vk-home-cate__item">
-                            <div class="vk-img-frame">
-                                <a href="product-list-level-2.html" title="">
-                                    <img src="{{asset('public/images/home/home-cate-1.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="vk-home-cate__brief">
-                                <div class="vk-home-cate__wrapper">
-                                    <h3 class="vk-home-cate__title"><a href="product-list-level-2.html" title="">samsung</a> </h3>
-                                    <a class="vk-home-cate__more" href="product-list-level-2.html" title="">xem thêm >> </a>
-                                </div>
-
-                            </div>
-                        </div> <!--./vk-home-cate__item-->
-                    </div> <!--./col-->
-
-
-
+                    @endforeach
                 </div> <!--./row-->
             </div> <!--./vk-home__cate-->
 
-
-
+            @foreach($cateHots as $cateHot)
             <div class="vk-home-product-show">
                 <div class="vk-product-list vk-product-list--home-box">
 
                     <div class="vk-heading-box">
                         <div class="vk-heading style-3 ">
-                            <h3 class="mb-0 text-uppercase"><a href="product-list.html">Iphone</a></h3>
+                            <h3 class="mb-0 text-uppercase"><a href="{{url('san-pham/'.$cateHot->alias)}}">{{$cateHot->name}}</a></h3>
+                            <?php $cateChilds = DB::table('product_categories')->where('parent_id', $cateHot->id)->get(); ?>
                             <ul class="vk-list vk-heading__menu">
-                                <li><a href="product-list-level-2.html" title="">Iphone 7</a></li>
-                                <li><a href="product-list-level-2.html" title="">Iphone 6</a></li>
-                                <li><a href="product-list-level-2.html" title="">Iphone 5</a></li>
-                                <li><a href="product-list-level-2.html" title="">Iphone 4</a></li>
+                                @foreach($cateChilds as $cateChild)
+                                <li><a href="{{url('danh-muc/'.$cateChild->alias)}}" title="">{{$cateChild->name}}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div><!-- ./vk-heading-box-->
-
                     <div class="row">
-
+                        <?php 
+                            $ids = array();
+                            $ids[] =  $cateHot->id;
+                            $cateChilds2 = DB::table('product_categories')->where('parent_id', $cateHot->id)->where('status',1)->get();
+                            if(!empty($cateChilds2)){
+                                foreach ($cateChilds2 as $cateChild) {
+                                   $ids[] = $cateChild->id;
+                                }
+                            }
+                            $products = DB::table('products')->where('status',1)->whereIn('cate_id', $ids)->orderBy('id','desc')->take(4)->get();
+                            @$productHoth = DB::table('products')->where('status',1)->whereIn('cate_id', $ids)->where('noibat',1)->first();
+                        ?>
                         <div class="col-lg-3">
                             <div class="vk-product__newest">
                                 <div class="vk-img">
-                                    <a href="product-detail.html" title="">
-                                        <img src="{{asset('public/images/shop/image-1.jpg')}}" alt="">
+                                    <a href="{{url('san-pham/'.@$productHoth->alias.'.html')}}" title="">
+                                        <img src="{{asset('upload/product/'.@$productHoth->photo)}}" alt="">
                                     </a>
                                 </div>
-
                                 <div class="vk-product__newest-brief">
-                                    <h3 class="vk-product__title"><a href="product-detail.html" title="">Apple iPhone 7 Plus 128Gb - New 100% đã Active</a></h3>
-                                    <p class="vk-product__id"><span>MS-IP7S128</span></p>
-                                    <p class="vk-product__price">16.799.000 VNĐ</p>
+                                    <h3 class="vk-product__title"><a href="{{url('san-pham/'.@$productHoth->alias.'.html')}}" title="">{{ @$productHoth->name }}</a></h3>
+                                    <p class="vk-product__id"><span>{{ @$productHoth->code }}</span></p>
+                                    <p class="vk-product__price">{{number_format(@$productHoth->price)}} VNĐ</p>
                                 </div>
-
                             </div>
                             <div class="vk-product__thumbnail ">
-                                <div class="vk-img-frame">
+                                <!-- <div class="vk-img-frame">
                                     <a href="product-list-level-2.html" title="">
                                         <img src="{{asset('public/images/home/home-item-1.jpg')}} alt="">
                                     </a>
-                                </div>
+                                </div> -->
                             </div>
-                        </div> <!--./col-->
-
-                        <div class="col-lg-9">
-                            <div class="vk-product-list vk-product-list--home row">
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="{{asset('public/images/shop/shop-item-1.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="{{asset('public/images/shop/shop-item-2.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="{{asset('public/images/shop/shop-item-3.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="{{asset('public/images/shop/shop-item-4.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="{{asset('public/images/shop/shop-item-5.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="{{asset('public/images/shop/shop-item-6.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="{{asset('public/images/shop/shop-item-7.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="{{asset('public/images/shop/shop-item-8.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-                            </div>
-                            <!-- /.vk-product-list vk-product-list--home -->
-                        </div> <!--./col-->
-
-
-
-                    </div> <!--./row-->
-                </div> <!--./vk-product-list vk-product-list--home-box-->
-            </div> <!--./vk-home-product-show-->
-
-            <div class="vk-home-product-show">
-                <div class="vk-product-list vk-product-list--home-box">
-
-                    <div class="vk-heading-box">
-                        <div class="vk-heading style-3 ">
-                            <h3 class="mb-0 text-uppercase"><a href="product-list.html">Nokia</a></h3>
-                            <ul class="vk-list vk-heading__menu">
-                                <li><a href="product-list-level-2.html" title="">Nokia X1</a></li>
-                                <li><a href="product-list-level-2.html" title="">Nokia X2</a></li>
-                                <li><a href="product-list-level-2.html" title="">Nokia X3</a></li>
-                                <li><a href="product-list-level-2.html" title="">Nokia X4</a></li>
-                            </ul>
                         </div>
-                    </div><!-- ./vk-heading-box-->
-
-                    <div class="row">
-
-                        <div class="col-lg-3">
-                            <div class="vk-product__newest">
-                                <div class="vk-img">
-                                    <a href="product-detail.html" title="">
-                                        <img src="images/shop/image-1.jpg" alt="">
-                                    </a>
-                                </div>
-
-                                <div class="vk-product__newest-brief">
-                                    <h3 class="vk-product__title"><a href="product-detail.html" title="">Apple iPhone 7 Plus 128Gb - New 100% đã Active</a></h3>
-                                    <p class="vk-product__id"><span>MS-IP7S128</span></p>
-                                    <p class="vk-product__price">16.799.000 VNĐ</p>
-                                </div>
-
-                            </div>
-                        </div> <!--./col-->
-
                         <div class="col-lg-9">
                             <div class="vk-product-list vk-product-list--home row">
 
+                            @foreach($products as $product)
                                 <div class="col-sm-6 col-md-3 item">
                                     <div class="vk-shop-item">
                                         <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-1.jpg" alt="">
+                                            <a class="vk-img" href="{{url('san-pham/'.$product->alias.'.html')}}">
+                                                <img src="{{asset('upload/product/'.$product->photo)}}" alt="">
                                             </a>
                                         </div>
 
                                         <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
+                                            <h3 class="vk-title"><a href="{{url('san-pham/'.$product->alias.'.html')}}">{{$product->name}}</a></h3>
+                                            <p class="vk-price">Giá: {{number_format($product->price)}} VNĐ</p>
                                         </div>
                                     </div> <!--./vk-shop-item-->
                                 </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-2.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-3.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-4.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
+                            @endforeach
+                               
                             </div>
                             <!-- /.vk-product-list vk-product-list--home -->
                         </div> <!--./col-->
@@ -375,219 +140,8 @@ $cateProducts = Cache::get('cateProducts');
                     </div> <!--./row-->
                 </div> <!--./vk-product-list vk-product-list--home-box-->
             </div> <!--./vk-home-product-show-->
-
-            <div class="vk-home-product-show">
-                <div class="vk-product-list vk-product-list--home-box">
-
-                    <div class="vk-heading-box">
-                        <div class="vk-heading style-3 ">
-                            <h3 class="mb-0 text-uppercase"><a href="product-list.html">HTC</a></h3>
-                            <ul class="vk-list vk-heading__menu">
-                                <li><a href="product-list-level-2.html" title="">HTC X1</a></li>
-                                <li><a href="product-list-level-2.html" title="">HTC X2</a></li>
-                                <li><a href="product-list-level-2.html" title="">HTC X3</a></li>
-                                <li><a href="product-list-level-2.html" title="">HTC X4</a></li>
-                            </ul>
-                        </div>
-                    </div><!-- ./vk-heading-box-->
-
-                    <div class="row">
-
-                        <div class="col-lg-3">
-                            <div class="vk-product__newest">
-                                <div class="vk-img">
-                                    <a href="product-detail.html" title="">
-                                        <img src="images/shop/image-1.jpg" alt="">
-                                    </a>
-                                </div>
-
-                                <div class="vk-product__newest-brief">
-                                    <h3 class="vk-product__title"><a href="product-detail.html" title="">Apple iPhone 7 Plus 128Gb - New 100% đã Active</a></h3>
-                                    <p class="vk-product__id"><span>MS-IP7S128</span></p>
-                                    <p class="vk-product__price">16.799.000 VNĐ</p>
-                                </div>
-
-                            </div>
-                        </div> <!--./col-->
-
-                        <div class="col-lg-9">
-                            <div class="vk-product-list vk-product-list--home row">
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-1.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-2.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-3.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-4.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-                            </div>
-                            <!-- /.vk-product-list vk-product-list--home -->
-                        </div> <!--./col-->
-
-
-
-                    </div> <!--./row-->
-                </div> <!--./vk-product-list vk-product-list--home-box-->
-            </div> <!--./vk-home-product-show-->
-
-            <div class="vk-home-product-show">
-                <div class="vk-product-list vk-product-list--home-box">
-
-                    <div class="vk-heading-box">
-                        <div class="vk-heading style-3 ">
-                            <h3 class="mb-0 text-uppercase"><a href="product-list.html">SAMSUNG</a></h3>
-                            <ul class="vk-list vk-heading__menu">
-                                <li><a href="product-list-level-2.html" title="">SAMSUNG X1</a></li>
-                                <li><a href="product-list-level-2.html" title="">SAMSUNG X2</a></li>
-                                <li><a href="product-list-level-2.html" title="">SAMSUNG X3</a></li>
-                                <li><a href="product-list-level-2.html" title="">SAMSUNG X4</a></li>
-                            </ul>
-                        </div>
-                    </div><!-- ./vk-heading-box-->
-
-                    <div class="row">
-
-                        <div class="col-lg-3">
-                            <div class="vk-product__newest">
-                                <div class="vk-img">
-                                    <a href="product-detail.html" title="">
-                                        <img src="images/shop/image-1.jpg" alt="">
-                                    </a>
-                                </div>
-
-                                <div class="vk-product__newest-brief">
-                                    <h3 class="vk-product__title"><a href="product-detail.html" title="">Apple iPhone 7 Plus 128Gb - New 100% đã Active</a></h3>
-                                    <p class="vk-product__id"><span>MS-IP7S128</span></p>
-                                    <p class="vk-product__price">16.799.000 VNĐ</p>
-                                </div>
-
-                            </div>
-                        </div> <!--./col-->
-
-                        <div class="col-lg-9">
-                            <div class="vk-product-list vk-product-list--home row">
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-1.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-2.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-3.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-
-                                <div class="col-sm-6 col-md-3 item">
-                                    <div class="vk-shop-item">
-                                        <div class="vk-img-frame">
-                                            <a class="vk-img" href="product-detail.html">
-                                                <img src="images/shop/shop-item-4.jpg" alt="">
-                                            </a>
-                                        </div>
-
-                                        <div class="vk-shop-item-brief">
-                                            <h3 class="vk-title"><a href="product-detail.html">iPhone 8 Plus 64Gb</a></h3>
-                                            <p class="vk-price">Giá: 23.199.000 VNĐ</p>
-                                        </div>
-                                    </div> <!--./vk-shop-item-->
-                                </div> <!--./item-->
-                            </div>
-                            <!-- /.vk-product-list vk-product-list--home -->
-                        </div> <!--./col-->
-
-
-
-                    </div> <!--./row-->
-                </div> <!--./vk-product-list vk-product-list--home-box-->
-            </div> <!--./vk-home-product-show-->
-
+            @endforeach               
+                
 
             <div class="vk-home-bottom">
                 <div class="row">
@@ -617,52 +171,23 @@ $cateProducts = Cache::get('cateProducts');
                         <div class="vk-product-sale-off">
                             <h3 class="vk-heading style3 text-uppercase style-2 inverse">Sale off trong tháng</h3>
                             <div class="vk-product-list vk-product-list--home">
-
-
+                                <?php $productsSale = DB::table('products')->where('status',1)->where('spbc',1)->take(3)->get(); ?>
+                                @foreach($productsSale as $productSale)
                                 <div class="vk-shop-item-2">
                                     <div class="vk-img-frame">
-                                        <a href="product-detail.html" class="vk-img">
-                                            <img src="images/shop/shop-list-1.jpg" alt="">
+                                        <a href="{{url('san-pham/'.$productSale->alias.'.html')}}" class="vk-img">
+                                            <img src="{{asset('upload/product/'.$productSale->photo)}}" alt="">
                                         </a>
                                     </div>
 
                                     <div class="vk-shop-item-brief">
-                                        <h3 class="vk-title"><a href="product-detail.html">Máy tập cơ lưng, bụng DL 2624</a></h3>
-                                        <p>Bảo hành: 1 năm</p>
-                                        <p>Mã sản phẩm: DL 2624</p>
-                                        <p class="vk-label-sale text-uppercase">sale off 20%</p>
+                                        <h3 class="vk-title"><a href="{{url('san-pham/'.$productSale->alias.'.html')}}">{{$productSale->name}}</a></h3>
+                                        <p>Bảo hành: {{$productSale->baohanh}}</p>
+                                        <p>Mã sản phẩm: {{$productSale->code}}</p>
+                                        <!-- <p class="vk-label-sale text-uppercase">sale off 20%</p> -->
                                     </div>
                                 </div> <!--./vk-shop-item-2-->
-
-                                <div class="vk-shop-item-2">
-                                    <div class="vk-img-frame">
-                                        <a href="product-detail.html" class="vk-img">
-                                            <img src="images/shop/shop-list-2.jpg" alt="">
-                                        </a>
-                                    </div>
-
-                                    <div class="vk-shop-item-brief">
-                                        <h3 class="vk-title"><a href="product-detail.html">Máy tập cơ lưng, bụng DL 2624</a></h3>
-                                        <p>Bảo hành: 1 năm</p>
-                                        <p>Mã sản phẩm: DL 2624</p>
-                                        <p class="vk-label-sale text-uppercase">sale off 20%</p>
-                                    </div>
-                                </div> <!--./vk-shop-item-2-->
-
-                                <div class="vk-shop-item-2">
-                                    <div class="vk-img-frame">
-                                        <a href="product-detail.html" class="vk-img">
-                                            <img src="images/shop/shop-list-3.jpg" alt="">
-                                        </a>
-                                    </div>
-
-                                    <div class="vk-shop-item-brief">
-                                        <h3 class="vk-title"><a href="product-detail.html">Máy tập cơ lưng, bụng DL 2624</a></h3>
-                                        <p>Bảo hành: 1 năm</p>
-                                        <p>Mã sản phẩm: DL 2624</p>
-                                        <p class="vk-label-sale text-uppercase">sale off 20%</p>
-                                    </div>
-                                </div> <!--./vk-shop-item-2-->
+                                @endforeach
 
                             </div> <!--./vk-product-list vk-product-list--home-->
                         </div> <!--./vk-product-sale-off-->
@@ -672,9 +197,7 @@ $cateProducts = Cache::get('cateProducts');
                         <div class="vk-home-video">
                             <h3 class="vk-heading style-2 inverse text-uppercase">Video</h3>
                             <div class="vk-img-frame">
-                                <a href="#" title="">
-                                    <img src="images/ads/1.jpg" alt="">
-                                </a>
+                                <div class="video">{!! $video->link !!}</div>
                             </div>
                         </div> <!--./vk-home-video-->
                     </div> <!-- /.col-lg-4 -->

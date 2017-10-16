@@ -105,7 +105,7 @@
                   <i class="fa fa-pencil fa-fw"></i><a href="backend/product/edit?id={{$item->id}}">Edit</a>
                 </td>
                 <td class="text-center">
-                  <i class="fa fa-trash-o fa-fw"></i><a onClick="if(!confirm('Xác nhận xóa')) return false;" href="admin/product/{{$item->id}}/delete">Delete</a>
+                  <i class="fa fa-trash-o fa-fw"></i><a onClick="if(!confirm('Xác nhận xóa')) return false;" href="backend/product/{{$item->id}}/delete">Delete</a>
                 </td>
               </tr>
               @endforeach
@@ -117,7 +117,7 @@
             <div class="col-md-6">
               <input type="button" onclick="javascript:window.location='backend/product/add'" value="Thêm" class="btn btn-primary" />
               <button type="button" id="xoahet" class="btn btn-success">Xóa</button>
-              <input type="button" value="Thoát" onclick="javascript:window.location='admin'" class="btn btn-danger" />
+              <input type="button" value="Thoát" onclick="javascript:window.location='backend'" class="btn btn-danger" />
 
             </div>
           </div>

@@ -25,12 +25,9 @@
 
                 <nav class="vk-breadcrumb">
                     <ul class="vk-list vk-list-inline vk-list-breadcrumb">
-                        <li><a href="index.html">Trang chủ</a></li>
-
-                        <li><a href="product-list-level-2.html">Iphone 7</a></li>
-
-                        <li><a href="product-list.html">Sản phẩm</a></li>
-
+                        <li><a href="{{url('')}}">Trang chủ</a></li>                      
+                        <li><a href="{{url('san-pham')}}">Sản phẩm</a></li>
+                        <li><a href="{{url('san-pham/'.$cateProduct->alias)}}">{{$cateProduct->name}}</a></li>
                         <li class="active">{{$product_detail->name}}</li>
                     </ul>
                 </nav>
@@ -75,11 +72,7 @@
                                     </ul>
                                     <p class="vk-shop-detail__price">{{number_format($product_detail->price)}} VNĐ</p>
                                     <div class="vk-shop__sale">
-                                        <p class="_sale">Giảm thêm 800.000đ khi thanh toán trực tuyến bằng
-                                            MasterCard</p>
-                                        <p class="_highlight">* Không áp dụng khi mua trả góp 0% bằng thẻ tín
-                                            dụng HSBC</p>
-                                        <p class="_highlight">* 1 đổi 1 trong 1 tháng với sản phẩm lỗi</p>
+                                        {!! $product_detail->huongdan !!}
                                     </div>
                                 </div>
                             </div> <!--./col-8-->
@@ -113,12 +106,13 @@
                                     </form>
                                     <div class="vk-policy">
                                         <label class="mb-0 mt-3" for="">Chính sách khuyến mại</label>
-                                        <ul class="vk-list vk-list-icon">
+                                        <!-- <ul class="vk-list vk-list-icon">
                                             <li> Trong hộp có: Sạc, Tai nghe, Sách hướng dẫn, Jack chuyển tai nghe 3.5mm,
                                                 Cáp, Cây lấy sim</li>
                                             <li> Bảo hành chính hãng: thân máy 12 tháng, sạc 12 tháng, tai nghe 12 tháng</li>
                                             <li> Giao hàng tận nơi miễn phí trong 30 phút.</li>
-                                        </ul>
+                                        </ul> -->
+                                        <div class="">{!! $product_detail->quatang !!}</div>
                                     </div>
 
                                 </div>  <!--./vk-shop-detail-part-->
@@ -143,7 +137,6 @@
                             <div class="vk-comment">
                                  <div class="fb-comments" data-href="{{url('san-pham/'.$product_detail->alias.'.html')}}" data-numposts="2"></div>
                             </div> <!--./vk-comment-->
-
                         </div> <!--./vk-product-detail-bottom-->
 
                         <div class="vk-product-related ">
@@ -158,29 +151,27 @@
                                                     <img src="{{asset('upload/product/'.$product->photo)}}" alt="">
                                                 </a>
                                             </div>
-
                                             <div class="vk-shop-item-brief">
                                                 <h3 class="vk-title"><a href="{{url('san-pham/'.$product->alias.'.html')}}">{{$product->name}}</a></h3>
                                                 <p class="vk-price">Giá: {{number_format($product->price)}} VNĐ</p>
                                             </div>
-                                        </div> <!--./vk-shop-item-->
-                                    </div> <!--./item-->
+                                        </div> 
+                                    </div> 
                                     @endforeach
 
-                                </div> <!--./vk-product-list-->
-                            </div> <!--./vk-product-list-box-->
-                        </div> <!--./vk-product-related-->
-                    </div> <!--./vk-left-content-->
+                                </div>
+                            </div> 
+                        </div> 
+                    </div> 
 
                     <div class="col-lg-2 vk-right-content order-3 order-lg-2">
                         <div class="vk-inner-content">
+                             <?php $banner = DB::table('banner_content')->where('position', 5)->get() ?>
+                            @foreach($banner as $qc)
                             <div class="vk-product__thumbail-cate pb-3 d-none d-lg-block">
-                                <a href="product-list-level-2.html" title=""><img src="{{asset('public/images/shop/thumbnail-1.jpg')}}" alt="" class="img-fluid"></a>
+                                <a href="{{$qc->link}}" title=""><img src="{{asset('upload/banner/'.$qc->image)}}" alt="" class="img-fluid"></a>
                             </div>
-
-                            <div class="vk-product__thumbail-cate pb-3 d-none d-lg-block">
-                                <a href="product-list-level-2.html" title=""><img src="{{asset('public/images/shop/thumbnail-2.jpg')}}" alt="" class="img-fluid"></a>
-                            </div>
+                            @endforeach
                             <div class="vk-product-sale-off">
                                 <h3 class="vk-heading style-2 inverse text-uppercase">Tin công nghệ</h3>
                                 <div class="vk-product-list">

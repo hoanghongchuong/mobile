@@ -74,7 +74,16 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>
-									
+									<div class="form-group">
+								      	<label for="alias">Ghi chú</label>
+								      	<textarea name="txtHuongdan" rows="5" id="txtContent" class="form-control"></textarea>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+								      	<label for="alias">Khuyến mại</label>
+								      	<textarea name="txtQuatang" rows="5" id="txtContent" class="form-control"></textarea>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-6 col-xs-12">
@@ -109,6 +118,7 @@
 							      	<label for="alias">Bảo hành</label>
 							      	<input type="text" name="txtBaohanh" id="txtBaohanh" value=""  class="form-control" />
 								</div>
+
 								<!-- <div class="form-group">
 							      	<label for="alias">Chất liệu</label>
 							      	<input type="text" name="txtThuonghieu" id="txtThuonghieu" value=""  class="form-control" />
@@ -119,10 +129,10 @@
 							      	<input type="text" name="txtVanchuyen" id="txtVanchuyen" value=""  class="form-control" />
 								</div> -->
 								<!-- <div class="form-group">
-							      	<label for="alias">Hướng dẫn sử dụng</label>
+							      	<label for="alias">Ghi chú</label>
 							      	<input type="text" name="txtHuongdan" id="txtHuongdan" value=""  class="form-control" />
-								</div>
-								<div class="form-group">
+								</div> -->
+								<!-- <div class="form-group">
 							      	<label for="alias">Năm sản xuất</label>
 							      	<input type="text" name="txtNamsanxuat" id="txtNamsanxuat" value=""  class="form-control" />
 								</div> -->
@@ -135,6 +145,7 @@
 							      	<input type="text" name="txtModel" id="txtModel" value=""  class="form-control" />
 								</div> -->
 							</div>
+							
 							<div class="clearfix"></div>
 	                  	</div><!-- /.tab-pane -->
 	                  	<div class="tab-pane" id="tab_2">
@@ -209,11 +220,11 @@
 				        	<input type="checkbox" name="noibat"> Nổi bật
 				    	</label>
 				    </div>
-				    <!-- <div class="form-group">
+				    <div class="form-group">
 					    <label>
-				        	<input type="checkbox" name="spbc"> Bán chạy
+				        	<input type="checkbox" name="spbc"> Sale off
 				    	</label>
-				    </div> -->
+				    </div>
 			    </div>
 			    <div class="clearfix"></div>
 			    <div class="box-footer">

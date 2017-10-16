@@ -24,14 +24,13 @@ Route::get('tuyen-dung',['as'=>'getNews', 'uses'=>'IndexController@getTuyenDung'
 Route::get('tuyen-dung/{id}.html',['as'=>'getNewsDetail', 'uses'=>'IndexController@getNewsTuyenDungDetail']);
 
 
-
 Route::get('tim-kiem',['as'=>'search', 'uses'=>'IndexController@search']);
 Route::post('newsletter',['as'=>'postNewsletter', 'uses'=>'IndexController@postNewsletter']);
 Route::get('san-pham',['as'=>'getProduct', 'uses'=>'IndexController@getProduct']);
 Route::get('san-pham/{alias}.html','IndexController@getProductDetail')->name('detailProduct');
 Route::get('san-pham/{id}',['as'=>'getProductList', 'uses'=>'IndexController@getProductList']);
 Route::get('thanh-toan',['as'=>'thanhtoan', 'uses' => 'IndexController@thanhtoan']);
-// Route::get('san-pham/{cate}/{alias}',['as'=>'getProductChild', 'uses'=>'IndexController@getProductChild']);
+Route::get('danh-muc/{alias}',['as'=>'getProductChild', 'uses'=>'IndexController@getProductChild']);
 
 Route::get('thuong-hieu/{alias}','IndexController@getProductByThuongHieu');
 
@@ -101,7 +100,6 @@ Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 		Route::get('/', ['as' => 'campaignCardIndex', 'uses' => 'Admin\CampaignController@getCard']);
 		Route::get('delete_list/{id}',['as'=>'deleteListCode','uses'=>'Admin\CampaignController@getDeleteList']);
 	});
-
 
 
 	Route::group(['prefix' => 'productcate'], function(){
@@ -339,7 +337,17 @@ Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 
 		Route::get('delete/{id}',['as'=>'admin.bank.delete','uses'=>'Admin\BankAccountController@delete']);
 	});
+	Route::group(['prefix'=>'video'], function(){
+		Route::get('/',['as'=>'admin.video.index', 'uses'=>'Admin\VideoController@index']);
 
+		Route::get('create',['as'=>'admin.video.getCreate', 'uses'=>'Admin\VideoController@getCreate']);
+		Route::post('create',['as'=>'admin.video.postCreate', 'uses'=>'Admin\VideoController@postCreate']);
+
+		Route::get('edit/{id}',['as'=>'admin.video.getEdit', 'uses'=>'Admin\VideoController@getEdit']);
+		Route::post('edit/{id}',['as'=>'admin.video.postEdit', 'uses'=>'Admin\VideoController@postEdit']);
+
+		Route::get('delete/{id}',['as'=>'admin.video.delete','uses'=>'Admin\VideoController@delete']);
+	});
 
 	Route::post('uploadImg', ['as'=>'admin.uploadImg' ,'uses'=>'Admin/UploadController@uploadImg']);
 	Route::post('dropzone/store', ['as'=>'dropzone.store','uses'=>'Admin/ProductController@dropzoneStore']);
