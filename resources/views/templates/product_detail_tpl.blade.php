@@ -144,7 +144,7 @@
                                 <h3 class="vk-heading">Các sản phẩm liên quan</h3>
                                 <div class="vk-product-list row vk-slider" data-slider="shop-related">
                                     @foreach($productSameCate as $product)
-                                    <div class="col-sm-6 col-md-4 col-lg-2 item">
+                                    <div class="col-sm-6 col-md-4 item">
                                         <div class="vk-shop-item">
                                             <div class="vk-img-frame">
                                                 <a class="vk-img" href="{{url('san-pham/'.$product->alias.'.html')}}">

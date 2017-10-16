@@ -118,11 +118,10 @@ class IndexController extends Controller {
 			}else{
 				$title = $product_cate->name;
 			}
-			
 			$keyword = $product_cate->keyword;
 			$description = $product_cate->description;
 			$img_share = asset('upload/product/'.$product_cate->photo);
-			
+
 			return view('templates.productlist_tpl', compact('product','product_cate','banner_danhmuc','doitac','keyword','description','title','img_share','cate_pro','tintucs','cateChilds','com'));
 		}else{
 			return redirect()->route('getErrorNotFount');
@@ -135,7 +134,6 @@ class IndexController extends Controller {
 		$tintucs = DB::table('news')->orderBy('id','desc')->take(3)->get();
 		return view('templates.productlist_level2', compact('tintucs','products'));
 	}
-
 	
 	public function getProductDetail($id)
 	{
